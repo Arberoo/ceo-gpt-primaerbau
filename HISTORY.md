@@ -43,7 +43,7 @@
 - HostedOffice-Eigenheiten gefunden und umgangen: keine verlässliche IDLE-Meldung (darum Nachschauen alle 30 s), eingefrorener Ordnerstand, verzögerter Suchindex (darum Abruf per UID FETCH, auch im stündlichen Abgleich)
 - Offene Leitung sieht neue Mails erst nach frischer Anmeldung: Abruf meldet sich neu an, sobald der Server mehr Mails kennt als geholt
 - Neuer Prüfer `scripts/intel/check_mail_latency.py` misst je echter Mail die Zeit bis zur Speicherung, läuft stündlich mit
-- Zustand jederzeit: `idle_imap.py --status`; Nachholen nach Neustart mit drei echten Test-Mails von Arber geprüft, Sofort-Ankunft echter Mails wird mit der nächsten eingehenden Mail bestätigt
+- Zustand jederzeit: `idle_imap.py --status`; Nachholen nach Neustart mit drei echten Test-Mails von Arber geprüft, Abnahme bestanden: echte Test-Mail Nr. 4 nach 27 s in der Datenbank, ohne Zutun
 
 ## 2026-10-15
 

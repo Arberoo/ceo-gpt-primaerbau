@@ -52,7 +52,7 @@ Server: `mail.de2.hostedoffice.ag`, Port 993 (SSL), Anmeldung mit Mailadresse + 
 
 ## Offen
 
-- **Abnahme:** Nachholen nach Neustart mit zwei echten Mails geprüft (Arber an info@, 14.10.). Nach der dritten Test-Mail wurde die frische Neuanmeldung ergänzt. Entwurf-Test mit 5 Minuten alter Leitung: unter 1 s. Entwürfe meldet der Server aber sofort, echte Zustellungen nicht; die Bestätigung kommt deshalb mit der nächsten echten Mail (`check_mail_latency.py`, läuft stündlich mit). Im Ordner „Entwürfe“ bei pb_luljeta liegen drei Test-Entwürfe „IDLE-Test …“ zum Löschen. Die zwei Test-Entwürfe „IDLE-Test …“ kann Luljeta löschen.
+- **Abnahme:** Nachholen nach Neustart mit zwei echten Mails geprüft (Arber an info@, 14.10.). Nach der dritten Test-Mail wurde die frische Neuanmeldung ergänzt. Entwurf-Test mit 5 Minuten alter Leitung: unter 1 s. **Abnahme bestanden 15.10.2026 00:15:** echte Test-Mail Nr. 4 von Arber an info@ nach 27 s in `mail_messages`, ohne Zutun (Server-Ankunft 00:15:24, Neuanmeldung 00:15:50, gespeichert 00:15:50). Ab jetzt misst `check_mail_latency.py` jede echte Mail stündlich mit. Im Ordner „Entwürfe“ bei pb_luljeta liegen drei Test-Entwürfe „IDLE-Test …“ zum Löschen. Die zwei Test-Entwürfe „IDLE-Test …“ kann Luljeta löschen.
 - Der Sofort-Abruf läuft nur, wenn der PC an und Luljeta angemeldet ist. Ein Dienst ohne Anmeldung wäre der nächste Schritt (bräuchte das Windows-Passwort in der Aufgabe).
 - Die Datenbank speichert nur Kopf und Textanfang (v1). Volltext und Anhänge kommen live über MCP.
 - MUBA-Postfächer (Microsoft 365) folgen über `intelligenz-outlook` (Plan `plans/2026-10-14-fernzugang-und-mailzugriff.md`, Teil 3).
