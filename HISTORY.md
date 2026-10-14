@@ -42,3 +42,11 @@
 - Bisheriger 15-Minuten-Abruf ist jetzt der stündliche Sicherheitsabgleich aller Ordner und startet den Sofort-Abruf neu, falls er steht
 - HostedOffice-Eigenheiten gefunden und umgangen: keine verlässliche IDLE-Meldung (darum Nachschauen alle 30 s), eingefrorener Ordnerstand, verzögerter Suchindex (darum Abruf per UID FETCH, auch im stündlichen Abgleich)
 - Zustand jederzeit: `idle_imap.py --status`; Nachholen nach Neustart mit zwei echten Test-Mails von Arber geprüft
+
+## 2026-10-15
+
+### MUBA-Postfächer über Microsoft Graph (Arber, nachts)
+- Entra-App „CEO-GPT PrimaerBau Mail“ im MUBA-Mandanten (nur dieser Mandant, Rechte User.Read, offline_access, Mail.ReadWrite, **kein Mail.Send**, Admin-Zustimmung erteilt)
+- Softeria ms-365-mcp v0.113.0 lokal gebaut (Node 24, `npm run generate`), offline_access-Patch, Starter `scripts/intel/ms365_mcp_run.py` nur mit Lese- und Entwurfswerkzeugen, MCP `mail_muba`
+- l.bajraktari@muba-service-gmbh.de angemeldet, Lesen getestet; info@ offen
+- Luljetas MUBA-Konto ist Globaler Administrator; Abklärung mit Insolvenzverwalter offen

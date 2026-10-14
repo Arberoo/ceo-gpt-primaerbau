@@ -96,8 +96,15 @@ def db() -> sqlite3.Connection:
     return conn
 
 
-def sync_new(conn: sqlite3.Connection, label: str, mb, name: str) -> int:
-    """Holt alle UIDs > Cursor im (bereits per EXAMINE geoeffneten) Ordner. Gibt Anzahl neu gespeicherter Mails zurueck."""
+class StaleView(Exception):
+    """Server kennt neue Mails (UIDNEXT), die offene Leitung kann sie aber nicht holen."""
+
+
+def sync_new(conn: sqlite3.Connection, label: str, mb, name: str) -> tuple:
+    """Holt alle UIDs > Cursor im (bereits per EXAMINE geoeffneten) Ordner.
+
+    Gibt (neu gespeichert, UIDNEXT falls der Server mehr Mails kennt als geholt wurden, sonst None).
+    """
     st = CI.folder_status(mb, name)
     row = conn.execute("SELECT uidvalidity, last_uid FROM mail_folders WHERE label=? AND name=?",
                        (label, name)).fetchone()
@@ -106,11 +113,10 @@ def sync_new(conn: sqlite3.Connection, label: str, mb, name: str) -> int:
         log.info("%s/%s: Erstabgleich bzw. UIDVALIDITY-Wechsel, Ordner wird komplett abgeglichen", label, name)
         written, _, _ = CI.backfill_folder(conn, label, mb, type("F", (), {"name": name})(), BATCH)
         mb.folder.set(name, readonly=True)
-        return written
+        return written, None
 
     last_uid = int(row[1] or 0)
-    # Kein Abkuerzen ueber UIDNEXT: HostedOffice/Exchange liefert per STATUS im geoeffneten
-    # Ordner einen veralteten UIDNEXT (getestet 14.10.2026). Darum immer direkt nach UIDs fragen.
+    behind = st["UIDNEXT"] if st["UIDNEXT"] and st["UIDNEXT"] - 1 > last_uid else None
     now = C.now_iso()
     written, maxuid, buf = 0, last_uid, []
     new = CI.uids_after(mb, last_uid)  # ohne SEARCH, siehe dort
@@ -118,7 +124,7 @@ def sync_new(conn: sqlite3.Connection, label: str, mb, name: str) -> int:
         conn.execute("UPDATE mail_folders SET msg_count=?, uidnext=?, synced_at=? WHERE label=? AND name=?",
                      (st["MESSAGES"], st["UIDNEXT"], C.now_iso(), label, name))
         conn.commit()
-        return 0
+        return 0, behind
     for msg in mb.fetch(uid_list=new, mark_seen=False, bulk=BATCH):
         try:
             uid = int(msg.uid)
@@ -141,7 +147,8 @@ def sync_new(conn: sqlite3.Connection, label: str, mb, name: str) -> int:
                  "WHERE label=? AND name=?",
                  (maxuid, st["MESSAGES"], st["UIDNEXT"], C.now_iso(), label, name))
     conn.commit()
-    return written
+    behind = st["UIDNEXT"] if st["UIDNEXT"] and st["UIDNEXT"] - 1 > maxuid else None
+    return written, behind
 
 
 # ---------- Ein Ordner, eine Verbindung ----------
@@ -171,13 +178,15 @@ def watch(account: dict, folder: str) -> None:
     key = f"{label}/{folder}"
     conn = db()
     backoff = BACKOFF_START
+    known_gap = None  # UIDNEXT, bei dem auch eine frische Anmeldung nichts fand (z. B. sofort geloeschte Mail)
     set_status(key, zustand="startet", fehler=None)
     while not _stop.is_set():
         mb = None
         try:
             mb = connect(account)
             mb.folder.set(folder, readonly=True)  # EXAMINE: nichts wird veraendert
-            n = sync_new(conn, label, mb, folder)  # Luecke seit letztem Cursor nachholen
+            n, behind = sync_new(conn, label, mb, folder)  # Luecke seit letztem Cursor nachholen
+            known_gap = behind
             log.info("%s: verbunden, nachgeholt +%d", key, n)
             set_status(key, zustand="verbunden", seit=_now(), letzter_abgleich=_now(), fehler=None)
             if n:
@@ -193,21 +202,20 @@ def watch(account: dict, folder: str) -> None:
                 if resp:
                     log.info("%s: Meldung vom Server %s", key, b" | ".join(resp)[:200])
                 # HostedOffice/Exchange friert den Ordnerstand einer offenen Leitung ein (getestet
-                # 14.10.2026: neue Mail auch nach 5 Min. nicht im Ordnerstand). Darum vor jedem
-                # Abgleich den Ordner neu oeffnen; nach einer Meldung kurz nachfassen, falls noch leer.
-                n = 0
-                for attempt in range(6 if resp else 1):
-                    if attempt:
-                        time.sleep(2)
-                    mb.folder.set(folder, readonly=True)
-                    n = sync_new(conn, label, mb, folder)
-                    if n:
-                        break
+                # 14.10.2026): Nach dem Neuoeffnen meldet STATUS die neue UIDNEXT, holen laesst sich
+                # die Mail aber erst nach frischer Anmeldung. Darum: Ordner neu oeffnen, abgleichen,
+                # und wenn der Server mehr kennt als geholt wurde, sofort neu anmelden.
+                mb.folder.set(folder, readonly=True)
+                n, behind = sync_new(conn, label, mb, folder)
+                if behind and behind != known_gap:
+                    raise StaleView(f"Server kennt UIDNEXT {behind}, Leitung sieht die Mail nicht")
                 fields = {"letzter_abgleich": _now(), "zustand": "verbunden"}
                 if n:
                     fields["letzte_neue"] = _now()
                     log.info("%s: +%d neue Mail(s) gespeichert", key, n)
                 set_status(key, **fields)
+        except StaleView as e:
+            log.info("%s: %s, melde neu an", key, e)
         except Exception as e:
             log.warning("%s: Verbindung unterbrochen (%r), neuer Versuch in %d s", key, e, backoff)
             set_status(key, zustand="getrennt, verbindet neu", fehler=f"{type(e).__name__}: {e}"[:300],

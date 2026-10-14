@@ -54,6 +54,8 @@ Schritte (Windows statt Mac, Abweichungen in `module-installs/intelligenz-imap/A
 
 ## Teil 3: MUBA-Postfächer über Microsoft Graph (Modul `intelligenz-outlook`)
 
+> **Umgesetzt am 15.10.2026 (nachts, Arber):** Entra-App „CEO-GPT PrimaerBau Mail“ (Einzelmandant, kein Mail.Send), l.bajraktari@ angemeldet und Lesen getestet. Offen: info@ (eigenes Konto oder freigegebenes Postfach?), Abklärung mit dem Insolvenzverwalter. Details: `docs/mail-muba-graph.md`, Abweichungen: `module-installs/intelligenz-outlook/ANPASSUNGEN.md`.
+
 **Geschätzter Aufwand:** 60–90 Min. Das Modul ist für den Mac gebaut (Node-Build eines gepatchten MCP-Servers, Keychain), auf Windows ist mehr anzupassen.
 
 - Arber registriert mit dem MUBA-Admin eine eigene Entra-App (ca. 10 Min.).

@@ -20,6 +20,12 @@
         "C:\\CEO-GPT-PrimaerBau\\scripts\\intel\\imap_mcp_run.py",
         "pb_rechnung"
       ]
+    },
+    "mail_muba": {
+      "command": "C:\\CEO-GPT-PrimaerBau\\.venv\\Scripts\\python.exe",
+      "args": [
+        "C:\\CEO-GPT-PrimaerBau\\scripts\\intel\\ms365_mcp_run.py"
+      ]
     }
   }
 }

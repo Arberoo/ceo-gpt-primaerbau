@@ -28,7 +28,7 @@ Server: `mail.de2.hostedoffice.ag`, Port 993 (SSL), Anmeldung mit Mailadresse + 
 - Läuft nie doppelt (Sperrdatei `data/imap_idle.lock`). Stürzt er ab, startet Windows ihn nach 1 Minute neu.
 - **Besonderheit HostedOffice (getestet 14.10.2026 mit zwei echten Mails von Arber):**
   1. Neue Mails im Posteingang meldet der Server per IDLE nicht zuverlässig: 5 Minuten lang kam keine Meldung (bei Entwürfen kam sie nach 1–2 s). Deshalb das eigene Nachschauen alle 30 Sekunden. Streng genommen ist das also „IDLE plus 30-Sekunden-Nachschauen“, kein reiner Ereignisbetrieb.
-  2. Eine offene Leitung zeigt einen eingefrorenen Ordnerstand. Darum wird der Ordner vor jedem Abgleich neu geöffnet.
+  2. Eine offene Leitung zeigt einen eingefrorenen Ordnerstand. Nach dem Neuöffnen des Ordners kennt sie zwar die neue „nächste Nummer“ (UIDNEXT), holen lässt sich die Mail aber erst nach einer frischen Anmeldung. Darum: alle 30 s Ordner neu öffnen und den Zähler prüfen. Kennt der Server mehr Mails als geholt wurden, meldet sich der Abruf sofort neu an und holt sie. Bleibt danach eine Lücke (z. B. Mail sofort wieder gelöscht), wird sie gemerkt und nicht endlos neu angemeldet.
   3. Die Suche (SEARCH) kennt neue Mails erst verzögert. Neue Mails werden deshalb direkt über ihre Nummer (UID FETCH) geholt, auch im stündlichen Abgleich (`uids_after` in `collect_imap.py`). Mit der Suche hätte eine Mail sonst dauerhaft übersprungen werden können.
 
 ## Sicherheit
@@ -51,7 +51,7 @@ Server: `mail.de2.hostedoffice.ag`, Port 993 (SSL), Anmeldung mit Mailadresse + 
 
 ## Offen
 
-- **Abnahme:** Nachholen nach Neustart mit zwei echten Mails geprüft (Arber an info@, 14.10.). Die Ankunft binnen einer Minute ohne Neustart wird mit einer dritten Test-Mail bestätigt. Die zwei Test-Entwürfe „IDLE-Test …“ kann Luljeta löschen.
+- **Abnahme:** Nachholen nach Neustart mit zwei echten Mails geprüft (Arber an info@, 14.10.). Nach der dritten Test-Mail wurde die frische Neuanmeldung ergänzt; die Ankunft binnen einer Minute ohne Neustart bestätigt eine vierte Test-Mail. Die zwei Test-Entwürfe „IDLE-Test …“ kann Luljeta löschen.
 - Der Sofort-Abruf läuft nur, wenn der PC an und Luljeta angemeldet ist. Ein Dienst ohne Anmeldung wäre der nächste Schritt (bräuchte das Windows-Passwort in der Aufgabe).
 - Die Datenbank speichert nur Kopf und Textanfang (v1). Volltext und Anhänge kommen live über MCP.
 - MUBA-Postfächer (Microsoft 365) folgen über `intelligenz-outlook` (Plan `plans/2026-10-14-fernzugang-und-mailzugriff.md`, Teil 3).
