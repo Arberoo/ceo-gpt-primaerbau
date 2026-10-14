@@ -48,6 +48,8 @@ Dein Mitarbeiter ist immer da. Er liest den Kontext, versteht das Business, such
 
 **PrimärBau und MUBA immer sauber trennen:** zwei getrennte Firmen, eigene Postfächer, eigene Unterlagen.
 
+**Mail-Entwürfe: kurz und sachlich.** Nur das, was der Empfänger für seine Aufgabe braucht. Keine Erklärungen, Listen oder Zusagen, die ihn nichts angehen (Rückmeldung Arber, 15.10.2026). Lieber zu knapp als zu ausführlich.
+
 Am Anfang jeder Sitzung führst du `/prime` aus. Damit liest dein Mitarbeiter den Stand und ist im Bild, bevor du den ersten Satz tippst.
 
 ---
