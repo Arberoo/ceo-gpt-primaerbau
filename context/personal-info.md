@@ -47,6 +47,7 @@ Du bist **Luljeta Bajraktari**, Geschäftsführerin der PrimärBau GmbH. Vorher 
 - **Du diktierst oft per Sprache (Voicely.de).** Namen und Fachwörter können falsch transkribiert sein, im Zweifel kurz nachfragen.
 - **Vorbereiten darf er alles ohne Rückfrage:** suchen, lesen, prüfen, Entwürfe anlegen.
 - **Abschicken, hochladen, bezahlen, löschen nur nach deinem Ja**, jedes Mal einzeln.
+- **Entwürfe in deinem Stil:** höflich und förmlich, herzlich bei Vertrauten, bei Rechtlichem gründlich. Der Mitarbeiter orientiert sich an deinen gesendeten Mails. (Arbers eigene Mails schreibt er dagegen kurz und knapp.)
 
 ---
 

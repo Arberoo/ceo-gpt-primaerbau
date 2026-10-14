@@ -48,7 +48,9 @@ Dein Mitarbeiter ist immer da. Er liest den Kontext, versteht das Business, such
 
 **PrimärBau und MUBA immer sauber trennen:** zwei getrennte Firmen, eigene Postfächer, eigene Unterlagen.
 
-**Mail-Entwürfe: kurz und sachlich.** Nur das, was der Empfänger für seine Aufgabe braucht. Keine Erklärungen, Listen oder Zusagen, die ihn nichts angehen (Rückmeldung Arber, 15.10.2026). Lieber zu knapp als zu ausführlich.
+**Mail-Entwürfe im Stil der Person, die absendet:**
+- **Luljeta (Standard):** ihr eigener Stil. Vor dem Schreiben ein paar ihrer gesendeten Mails an denselben oder einen ähnlichen Empfänger lesen. Typisch: höflich und förmlich („Sehr geehrter Herr …“, „Vielen Dank und ich wünsche Ihnen einen schönen Abend“), herzlich bei Vertrauten („Liebe Grüße, Luljeta“), bei Rechtlichem ausführlich und gründlich (Sachverhalt Schritt für Schritt, Belege, Vorbehalt der Rechte).
+- **Arber:** kurz und sachlich. Nur das, was der Empfänger für seine Aufgabe braucht, keine Erklärungen oder Zusagen, die ihn nichts angehen (Rückmeldung Arber, 15.10.2026).
 
 Am Anfang jeder Sitzung führst du `/prime` aus. Damit liest dein Mitarbeiter den Stand und ist im Bild, bevor du den ersten Satz tippst.
 
