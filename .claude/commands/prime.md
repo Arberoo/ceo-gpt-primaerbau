@@ -10,6 +10,7 @@
 4. `HISTORY.md`: CEO-GPT-Logbuch (was wurde gebaut, wann, von wem)
 5. `docs/_index.md`: Doku-Routing-Index (hier findest du die passenden Dokus)
 6. Offene Briefings: Schau in `outputs/briefings/`. Gibt es eine Datei mit „Status: OFFEN“, ist das der wichtigste Punkt der Sitzung. Arbeite sie nach der Zusammenfassung mit Luljeta durch, wie in der Datei beschrieben (erst Technik-Check selbst erledigen, dann Punkt für Punkt erklären und fragen).
+8. Privat: Lies `data/privat/offen.md` (nur lokal). Offene private Punkte bekommen in der Zusammenfassung einen **eigenen Abschnitt „🏠 Privat“**, getrennt vom Geschäftlichen, damit sie im Trubel nicht untergehen. Private Einzelheiten nie in Dateien schreiben, die zu GitHub gehen (`context/`, `outputs/`, `docs/`), sondern nur nach `data/privat/`.
 7. Sicherungs-Check: Lies die letzten Zeilen von `data/auto_commit.log`. Ist der letzte erfolgreiche Lauf älter als drei Tage oder steht dort „Push scheiterte“/„Fehler“, sag das gleich zu Beginn in einem Satz (Lösung: `docs/absicherung-windows.md`).
 
 ## Zusammenfassung an den Geschäftsführer

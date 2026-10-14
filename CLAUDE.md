@@ -48,6 +48,8 @@ Dein Mitarbeiter ist immer da. Er liest den Kontext, versteht das Business, such
 
 **PrimärBau und MUBA immer sauber trennen:** zwei getrennte Firmen, eigene Postfächer, eigene Unterlagen.
 
+**Privates nicht untergehen lassen, aber lokal halten:** Private Punkte von Luljeta (z. B. Lindenstraße) stehen in `data/privat/offen.md` (nur auf dem PC, nie GitHub). `/prime` zeigt sie immer in einem eigenen Abschnitt „🏠 Privat“. Private Einzelheiten nie in `context/`, `outputs/` oder `docs/` schreiben.
+
 **Mail-Entwürfe im Stil der Person, die absendet:**
 - **Luljeta (Standard):** ihr eigener Stil. Vor dem Schreiben ein paar ihrer gesendeten Mails an denselben oder einen ähnlichen Empfänger lesen. Typisch: höflich und förmlich („Sehr geehrter Herr …“, „Vielen Dank und ich wünsche Ihnen einen schönen Abend“), herzlich bei Vertrauten („Liebe Grüße, Luljeta“), bei Rechtlichem ausführlich und gründlich (Sachverhalt Schritt für Schritt, Belege, Vorbehalt der Rechte).
 - **Arber:** kurz und sachlich. Nur das, was der Empfänger für seine Aufgabe braucht, keine Erklärungen oder Zusagen, die ihn nichts angehen (Rückmeldung Arber, 15.10.2026).

@@ -34,7 +34,7 @@
 | **MUBA:** Unterlagen zusammenstellen und an den Insolvenzverwalter schicken | laufend | offen, viel Schriftverkehr |
 | **Übertragung der Anteile** an Luljeta | so schnell wie möglich | vereinbart, nicht vollzogen |
 | **Freistellungsbescheinigung** beim Finanzamt beantragen (Bauabzugsteuer) | bald | offen, fällt Luljeta schwer |
-| **Privat, Lindenstraße:** Unterlagen an Frau Löfler schicken | ganz wichtig | offen |
+| **Privat:** ein wichtiger offener Punkt, siehe `data/privat/offen.md` (nur lokal) | ganz wichtig | offen |
 | **MUBA-Postfächer** als .pst sichern, bevor das Microsoft-Konto wegfällt | so bald wie möglich | 14.10.: Outlook lädt info@ und l.bajraktari@ komplett nach, Export am 15.10.; Arber: kompletter Export über Purview (`docs/muba-postfaecher-sichern.md`) |
 | **Alte CEO-GPT-Kopie im MUBA-OneDrive löschen** (`C:\Users\Muba\OneDrive - MUBA Service GmbH\Dokumente\CEO-GPT-PrimaerBau`). Arber hat zugestimmt, unter einer Bedingung: Laut `data/auto_commit.log` ist die Nacht-Sicherung vom 14.10. erfolgreich gelaufen und gepusht. Vor dem Löschen kurz Bescheid sagen. | 15.10.2026 | vorgemerkt |
 | **MUBA-Export Weg A:** prüfen, ob info@ und l.bajraktari@ fertig nachgeladen sind, dann .pst nach `C:\MUBA-Sicherung`. Das Wachhalte-Programm endet 15.10. um 8 Uhr, danach greift wieder der Energiesparmodus nach 20 Min. | 15.10.2026 | vorgemerkt |
