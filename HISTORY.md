@@ -31,3 +31,9 @@
 - Plan `plans/2026-10-14-fernzugang-und-mailzugriff.md`: Mails beim Anbieter, eigenes Tailscale-Konto PrimärBau mit Teilen an Arber, Edona übers Büronetz, Windows-Anmeldung absichern (Wochenende)
 - Windows-Anmeldung geprüft: kein Entra-Join, keine MUBA-Fernverwaltung, nur lose Arbeitskonto-Verknüpfung
 - `intelligenz-imap` auf Windows: drei PrimärBau-Postfächer bei HostedOffice (IMAP, IDLE-fähig), Live-MCP je Postfach **nur Entwürfe**, Backfill in data.db, Abruf alle 15 Min. per Aufgabenplanung; Abweichungen in `module-installs/intelligenz-imap/ANPASSUNGEN.md`
+
+### Mails kommen sofort an (IMAP IDLE)
+- Neuer Dauerläufer `scripts/intel/idle_imap.py`: hält je PrimärBau-Postfach eine Leitung zu INBOX und „Gesendete Elemente“ offen, neue Mails sind nach 1–2 Sekunden in `data/data.db` (gemessen mit Test-Entwürfen)
+- Windows-Aufgabe „CEO-GPT PrimaerBau Mail-Sofort“ startet ihn bei jeder Anmeldung, Neustart nach Absturz; Einrichtung `scripts/intel/setup_imap_idle_windows.ps1`
+- Bisheriger 15-Minuten-Abruf ist jetzt der stündliche Sicherheitsabgleich aller Ordner und startet den Sofort-Abruf neu, falls er steht
+- Zustand jederzeit: `idle_imap.py --status`; Abnahme mit echter eingehender Mail steht noch aus

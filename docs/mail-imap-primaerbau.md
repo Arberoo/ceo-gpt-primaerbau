@@ -15,7 +15,18 @@ Server: `mail.de2.hostedoffice.ag`, Port 993 (SSL), Anmeldung mit Mailadresse + 
 ## Zwei Wege
 
 1. **Live (MCP)**: `ai-zerolab/mcp-email-server` 1.13.1, gestartet über `scripts/intel/imap_mcp_run.py <label>` (in `.mcp.json`). Lesen, suchen, Anhänge lesen, **Entwürfe** im Ordner „Entwürfe“ anlegen. Öffnen markiert nichts als gelesen (BODY.PEEK).
-2. **Datenbank**: `scripts/intel/collect_imap.py` kopiert Absender, Betreff, Datum und Textanfang aller Ordner nach `data/data.db` (Tabelle `mail_messages`). Windows-Aufgabe „CEO-GPT PrimaerBau Mail-Abruf“ alle 15 Min., Protokoll `data/imap_collect.log`.
+2. **Datenbank**: Absender, Betreff, Datum und Textanfang landen in `data/data.db` (Tabelle `mail_messages`). Zwei Aufgaben sorgen dafür:
+   - **Sofort-Abruf** „CEO-GPT PrimaerBau Mail-Sofort“ (`scripts/intel/idle_imap.py`): startet bei jeder Anmeldung und läuft dauerhaft. Hält je Postfach eine Leitung zu INBOX und „Gesendete Elemente“ offen (IMAP IDLE, 6 Leitungen). Der Server meldet neue Mails sofort, gespeichert sind sie nach 1–2 Sekunden (gemessen 14.10.2026). Protokoll `data/imap_idle.log`, Zustand `data/mail_sofort_status.json`.
+   - **Sicherheitsabgleich** „CEO-GPT PrimaerBau Mail-Abruf“ (`scripts/intel/collect_imap.py`): stündlich, alle Ordner (auch Archiv und Unterordner). Startet den Sofort-Abruf neu, falls der länger als 15 Minuten kein Lebenszeichen gibt. Protokoll `data/imap_collect.log`.
+
+### Wie der Sofort-Abruf arbeitet
+
+- Öffnet die Ordner nur zum Lesen (EXAMINE) und holt mit BODY.PEEK: nichts wird als gelesen markiert, verschoben oder gelöscht.
+- Erneuert das Warten (IDLE) alle 5 Minuten (Regel: spätestens nach 29) und gleicht dabei jedes Mal ab.
+- Merkt sich je Ordner die letzte gespeicherte Mail-Nummer (UID + UIDVALIDITY in `mail_folders`) und schreibt sie erst **nach** dem Speichern fort. Doppelte Meldungen erzeugen keine doppelten Einträge.
+- Bricht die Leitung ab (Internet weg, PC im Ruhezustand), verbindet er neu: erst nach 5 Sekunden, dann immer länger bis höchstens 5 Minuten. Danach holt er alles nach, was seit der letzten gespeicherten Mail kam.
+- Läuft nie doppelt (Sperrdatei `data/imap_idle.lock`). Stürzt er ab, startet Windows ihn nach 1 Minute neu.
+- Besonderheit HostedOffice: Die „nächste Nummer“ (UIDNEXT), die der Server im geöffneten Ordner meldet, ist veraltet. Der Abruf fragt deshalb immer direkt nach neuen Nummern.
 
 ## Sicherheit
 
@@ -26,6 +37,9 @@ Server: `mail.de2.hostedoffice.ag`, Port 993 (SSL), Anmeldung mit Mailadresse + 
 
 ## Prüfen und Fehlerbehebung
 
+- Läuft der Sofort-Abruf? `.venv\Scripts\python.exe -X utf8 scripts\intel\idle_imap.py --status` (zeigt je Ordner Zustand und letzten Abgleich)
+- Sofort-Abruf neu starten: in der Aufgabenplanung „CEO-GPT PrimaerBau Mail-Sofort“ beenden und ausführen, oder `schtasks /run /tn "CEO-GPT PrimaerBau Mail-Sofort"`
+- Aufgaben neu einrichten: `powershell -ExecutionPolicy Bypass -File scripts\intel\setup_imap_idle_windows.ps1` (`-Entfernen` stellt den alten 15-Minuten-Abruf wieder her)
 - Anmeldung aller Konten: `.venv\Scripts\python.exe -X utf8 scripts\intel\verify_imap_pipeline.py`
 - Ordner und Mengen: `.venv\Scripts\python.exe -X utf8 scripts\intel\discover_imap.py`
 - Passwort geändert: `powershell -ExecutionPolicy Bypass -File scripts\mail_passwoerter_hinterlegen.ps1`
@@ -34,7 +48,8 @@ Server: `mail.de2.hostedoffice.ag`, Port 993 (SSL), Anmeldung mit Mailadresse + 
 
 ## Offen
 
-- **IDLE-Dauerläufer** statt 15-Minuten-Takt (neue Mails sofort, Standard „Inhaltseingang“). Bis dahin: eingeschränkter Betrieb, max. 15 Min. Verzögerung, nur wenn der PC an und Luljeta angemeldet ist.
+- **Abnahme mit echter Mail in INBOX** steht noch aus (Test bisher mit zwei Entwürfen im Ordner „Entwürfe“ bei pb_luljeta: Ankunft nach 1–2 s, Nachholen nach Neustart geprüft). Die zwei Test-Entwürfe „IDLE-Test …“ kann Luljeta löschen.
+- Der Sofort-Abruf läuft nur, wenn der PC an und Luljeta angemeldet ist. Ein Dienst ohne Anmeldung wäre der nächste Schritt (bräuchte das Windows-Passwort in der Aufgabe).
 - Die Datenbank speichert nur Kopf und Textanfang (v1). Volltext und Anhänge kommen live über MCP.
 - MUBA-Postfächer (Microsoft 365) folgen über `intelligenz-outlook` (Plan `plans/2026-10-14-fernzugang-und-mailzugriff.md`, Teil 3).
 
@@ -43,3 +58,4 @@ Server: `mail.de2.hostedoffice.ag`, Port 993 (SSL), Anmeldung mit Mailadresse + 
 | Datum | Änderung |
 |---|---|
 | 2026-10-14 | Eingerichtet, Live-Lesen und Löschsperre getestet, Backfill gestartet |
+| 2026-10-14 | Sofort-Abruf per IMAP IDLE (`idle_imap.py`, Aufgabe „Mail-Sofort“ bei Anmeldung), 15-Min.-Abruf wird stündlicher Sicherheitsabgleich mit Wächter |
