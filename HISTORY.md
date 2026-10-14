@@ -18,3 +18,10 @@
 - Schutzliste (.gitignore) erweitert: .pst/.msg/.eml, PDFs, Office-Dateien, Bilder, `context/import/` bleiben lokal
 - Nächtliche Sicherung 23:45 über die Windows-Aufgabenplanung („CEO-GPT PrimaerBau Sicherung“), Probelauf erfolgreich
 - HISTORY.md, docs/-System und `/commit` Befehl angelegt, `/prime` liest Logbuch und Doku-Index
+
+### Kontext, Mails, erster Fall (Luljeta und Arber)
+- Kontext-Interview: Firma (Arber) und Luljetas Rolle, Ziele, Fristen; CLAUDE.md personalisiert (Leitregel „ein Klick“, PrimärBau/MUBA trennen)
+- Mail-Zugriff über das klassische Outlook am PC erprobt (`docs/mail-zugriff-outlook.md`)
+- Erster Fall: Bayrhof ./. PrimärBau (RA Dr. Kautz, Frist 23.10.2026), Akte lokal in `data/akten/`
+- MUBA-Postfächer: Outlook bei info@ und l.bajraktari@ auf „Alle“ gestellt, lädt nach; Export folgt; Anleitung Purview für Arber (`docs/muba-postfaecher-sichern.md`)
+- `/prime` legt offene Briefings aus `outputs/briefings/` zuerst vor (erstes Briefing für Luljeta am 15.10.)
