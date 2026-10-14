@@ -37,6 +37,16 @@ except SystemExit as e:
 except Exception as e:
     print(f"[collect] Fehler: {e}", flush=True)
 
+# Messung: kamen die echten Mails der letzten 2 Stunden binnen 60 s in die Datenbank?
+try:
+    print("[collect] Ankunftszeiten letzte 2 Stunden:", flush=True)
+    sys.argv = [str(HERE / "check_mail_latency.py"), "--hours", "2"]
+    runpy.run_path(str(HERE / "check_mail_latency.py"), run_name="__main__")
+except SystemExit:
+    pass
+except Exception as e:
+    print(f"[collect] Messung fehlgeschlagen: {e}", flush=True)
+
 # Waechter: Sofort-Abruf (IDLE) neu starten, falls er kein Lebenszeichen mehr gibt
 try:
     import json, subprocess

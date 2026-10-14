@@ -41,7 +41,9 @@
 - Windows-Aufgabe „CEO-GPT PrimaerBau Mail-Sofort“ startet ihn bei jeder Anmeldung, Neustart nach Absturz; Einrichtung `scripts/intel/setup_imap_idle_windows.ps1`
 - Bisheriger 15-Minuten-Abruf ist jetzt der stündliche Sicherheitsabgleich aller Ordner und startet den Sofort-Abruf neu, falls er steht
 - HostedOffice-Eigenheiten gefunden und umgangen: keine verlässliche IDLE-Meldung (darum Nachschauen alle 30 s), eingefrorener Ordnerstand, verzögerter Suchindex (darum Abruf per UID FETCH, auch im stündlichen Abgleich)
-- Zustand jederzeit: `idle_imap.py --status`; Nachholen nach Neustart mit zwei echten Test-Mails von Arber geprüft
+- Offene Leitung sieht neue Mails erst nach frischer Anmeldung: Abruf meldet sich neu an, sobald der Server mehr Mails kennt als geholt
+- Neuer Prüfer `scripts/intel/check_mail_latency.py` misst je echter Mail die Zeit bis zur Speicherung, läuft stündlich mit
+- Zustand jederzeit: `idle_imap.py --status`; Nachholen nach Neustart mit drei echten Test-Mails von Arber geprüft, Sofort-Ankunft echter Mails wird mit der nächsten eingehenden Mail bestätigt
 
 ## 2026-10-15
 

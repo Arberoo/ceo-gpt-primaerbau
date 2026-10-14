@@ -41,6 +41,7 @@ Server: `mail.de2.hostedoffice.ag`, Port 993 (SSL), Anmeldung mit Mailadresse + 
 ## Prüfen und Fehlerbehebung
 
 - Läuft der Sofort-Abruf? `.venv\Scripts\python.exe -X utf8 scripts\intel\idle_imap.py --status` (zeigt je Ordner Zustand und letzten Abgleich)
+- Kommen echte Mails schnell genug an? `.venv\Scripts\python.exe -X utf8 scripts\intel\check_mail_latency.py --hours 24` vergleicht je Mail die Ankunft beim Server mit der Speicherung (ok bis 60 s). Läuft zusätzlich bei jedem stündlichen Abgleich mit, Ergebnis in `data/imap_collect.log`.
 - Sofort-Abruf neu starten: in der Aufgabenplanung „CEO-GPT PrimaerBau Mail-Sofort“ beenden und ausführen, oder `schtasks /run /tn "CEO-GPT PrimaerBau Mail-Sofort"`
 - Aufgaben neu einrichten: `powershell -ExecutionPolicy Bypass -File scripts\intel\setup_imap_idle_windows.ps1` (`-Entfernen` stellt den alten 15-Minuten-Abruf wieder her)
 - Anmeldung aller Konten: `.venv\Scripts\python.exe -X utf8 scripts\intel\verify_imap_pipeline.py`
@@ -51,7 +52,7 @@ Server: `mail.de2.hostedoffice.ag`, Port 993 (SSL), Anmeldung mit Mailadresse + 
 
 ## Offen
 
-- **Abnahme:** Nachholen nach Neustart mit zwei echten Mails geprüft (Arber an info@, 14.10.). Nach der dritten Test-Mail wurde die frische Neuanmeldung ergänzt; die Ankunft binnen einer Minute ohne Neustart bestätigt eine vierte Test-Mail. Die zwei Test-Entwürfe „IDLE-Test …“ kann Luljeta löschen.
+- **Abnahme:** Nachholen nach Neustart mit zwei echten Mails geprüft (Arber an info@, 14.10.). Nach der dritten Test-Mail wurde die frische Neuanmeldung ergänzt. Entwurf-Test mit 5 Minuten alter Leitung: unter 1 s. Entwürfe meldet der Server aber sofort, echte Zustellungen nicht; die Bestätigung kommt deshalb mit der nächsten echten Mail (`check_mail_latency.py`, läuft stündlich mit). Im Ordner „Entwürfe“ bei pb_luljeta liegen drei Test-Entwürfe „IDLE-Test …“ zum Löschen. Die zwei Test-Entwürfe „IDLE-Test …“ kann Luljeta löschen.
 - Der Sofort-Abruf läuft nur, wenn der PC an und Luljeta angemeldet ist. Ein Dienst ohne Anmeldung wäre der nächste Schritt (bräuchte das Windows-Passwort in der Aufgabe).
 - Die Datenbank speichert nur Kopf und Textanfang (v1). Volltext und Anhänge kommen live über MCP.
 - MUBA-Postfächer (Microsoft 365) folgen über `intelligenz-outlook` (Plan `plans/2026-10-14-fernzugang-und-mailzugriff.md`, Teil 3).
