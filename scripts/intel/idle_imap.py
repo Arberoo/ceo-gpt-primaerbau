@@ -8,8 +8,10 @@ holt der Laeufer sofort alle neuen UIDs und speichert sie in mail_messages
 Regeln (Standard module-installs/intelligenz-imap/reference/dateneingang.md):
 - READ-ONLY: Ordner werden mit EXAMINE geoeffnet, Abruf mit BODY.PEEK
   (mark_seen=False). Nichts wird als gelesen markiert, verschoben oder geloescht.
-- IDLE wird alle RENEW_SECONDS (5 Min., RFC 2177 verlangt < 29 Min.) beendet
-  und neu gestartet. Bei jeder Erneuerung wird zusaetzlich abgeglichen.
+- IDLE wird alle RENEW_SECONDS (30 s) beendet, der Ordner neu geoeffnet und
+  abgeglichen. Grund: HostedOffice meldet neue Mails per IDLE nicht zuverlaessig
+  und zeigt einer offenen Leitung einen eingefrorenen Ordnerstand. Neue UIDs werden
+  per UID FETCH ermittelt (nicht SEARCH, dessen Index hinterherhinkt).
 - Cursor (mail_folders.last_uid) wird erst NACH erfolgreichem Speichern
   fortgeschrieben. Doppelte Meldungen erzeugen dank UNIQUE(label, folder, uid)
   keine Dubletten. UIDVALIDITY-Wechsel -> Ordner wird ueber collect_imap neu gezogen.
@@ -47,7 +49,10 @@ LOG_FILE = DATA / "imap_idle.log"
 LOCK_FILE = DATA / "imap_idle.lock"
 DB_FILE = DATA / "data.db"
 
-RENEW_SECONDS = 5 * 60          # IDLE spaetestens alle 5 Min. erneuern (RFC: < 29 Min.)
+# IDLE alle 30 s beenden, Ordner neu oeffnen und selbst nachsehen. HostedOffice meldet neue
+# Mails im Posteingang per IDLE nicht zuverlaessig (getestet 14.10.2026: keine Meldung in 5 Min.),
+# darum garantiert erst das Nachsehen die Ankunft binnen ~30 s. RFC 2177 verlangt < 29 Min.
+RENEW_SECONDS = 30
 BACKOFF_START, BACKOFF_MAX = 5, 300
 SOCKET_TIMEOUT = 60
 BATCH = 50
@@ -108,7 +113,13 @@ def sync_new(conn: sqlite3.Connection, label: str, mb, name: str) -> int:
     # Ordner einen veralteten UIDNEXT (getestet 14.10.2026). Darum immer direkt nach UIDs fragen.
     now = C.now_iso()
     written, maxuid, buf = 0, last_uid, []
-    for msg in mb.fetch(f"UID {last_uid + 1}:*", mark_seen=False, bulk=BATCH):
+    new = CI.uids_after(mb, last_uid)  # ohne SEARCH, siehe dort
+    if not new:
+        conn.execute("UPDATE mail_folders SET msg_count=?, uidnext=?, synced_at=? WHERE label=? AND name=?",
+                     (st["MESSAGES"], st["UIDNEXT"], C.now_iso(), label, name))
+        conn.commit()
+        return 0
+    for msg in mb.fetch(uid_list=new, mark_seen=False, bulk=BATCH):
         try:
             uid = int(msg.uid)
         except (TypeError, ValueError):
@@ -179,7 +190,19 @@ def watch(account: dict, folder: str) -> None:
                 mb.idle.stop()  # wirft bei toter Verbindung -> Wiederverbindung
                 if not resp and time.monotonic() - started < 1:
                     raise ConnectionError("Verbindung vom Server geschlossen")
-                n = sync_new(conn, label, mb, folder)
+                if resp:
+                    log.info("%s: Meldung vom Server %s", key, b" | ".join(resp)[:200])
+                # HostedOffice/Exchange friert den Ordnerstand einer offenen Leitung ein (getestet
+                # 14.10.2026: neue Mail auch nach 5 Min. nicht im Ordnerstand). Darum vor jedem
+                # Abgleich den Ordner neu oeffnen; nach einer Meldung kurz nachfassen, falls noch leer.
+                n = 0
+                for attempt in range(6 if resp else 1):
+                    if attempt:
+                        time.sleep(2)
+                    mb.folder.set(folder, readonly=True)
+                    n = sync_new(conn, label, mb, folder)
+                    if n:
+                        break
                 fields = {"letzter_abgleich": _now(), "zustand": "verbunden"}
                 if n:
                     fields["letzte_neue"] = _now()

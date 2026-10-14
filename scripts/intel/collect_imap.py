@@ -52,6 +52,23 @@ def folder_status(mb, name: str) -> dict:
     return {k: 0 for k in STATUS_OPTS}
 
 
+def uids_after(mb, last_uid: int) -> list:
+    """UIDs > last_uid im geoeffneten Ordner, per UID FETCH statt SEARCH.
+
+    HostedOffice/Exchange beantwortet SEARCH aus einem Suchindex, der neue Mails erst
+    verzoegert kennt (getestet 14.10.2026). Mit SEARCH koennte eine Mail hinter dem
+    Cursor verschwinden. UID FETCH sieht jede Mail sofort.
+    """
+    typ, data = mb.client.uid("FETCH", f"{last_uid + 1}:*", "(UID)")
+    uids = set()
+    for item in data or []:
+        raw = item[0] if isinstance(item, tuple) else item
+        m = re.search(rb"UID (\d+)", raw or b"")
+        if m and int(m.group(1)) > last_uid:
+            uids.add(int(m.group(1)))
+    return [str(u) for u in sorted(uids)]
+
+
 def _received(msg) -> str:
     d = getattr(msg, "date", None)
     if d is not None:
@@ -158,7 +175,8 @@ def backfill_folder(conn, label: str, mb, folder, batch: int) -> tuple:
     now = C.now_iso()
     written, seen, maxuid, buf = 0, 0, last_uid, []
     try:
-        for msg in mb.fetch(f"UID {last_uid + 1}:*", mark_seen=False, bulk=batch):
+        new = uids_after(mb, last_uid)
+        for msg in (mb.fetch(uid_list=new, mark_seen=False, bulk=batch) if new else ()):
             try:
                 uid = int(msg.uid)
             except (TypeError, ValueError):

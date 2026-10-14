@@ -16,17 +16,20 @@ Server: `mail.de2.hostedoffice.ag`, Port 993 (SSL), Anmeldung mit Mailadresse + 
 
 1. **Live (MCP)**: `ai-zerolab/mcp-email-server` 1.13.1, gestartet über `scripts/intel/imap_mcp_run.py <label>` (in `.mcp.json`). Lesen, suchen, Anhänge lesen, **Entwürfe** im Ordner „Entwürfe“ anlegen. Öffnen markiert nichts als gelesen (BODY.PEEK).
 2. **Datenbank**: Absender, Betreff, Datum und Textanfang landen in `data/data.db` (Tabelle `mail_messages`). Zwei Aufgaben sorgen dafür:
-   - **Sofort-Abruf** „CEO-GPT PrimaerBau Mail-Sofort“ (`scripts/intel/idle_imap.py`): startet bei jeder Anmeldung und läuft dauerhaft. Hält je Postfach eine Leitung zu INBOX und „Gesendete Elemente“ offen (IMAP IDLE, 6 Leitungen). Der Server meldet neue Mails sofort, gespeichert sind sie nach 1–2 Sekunden (gemessen 14.10.2026). Protokoll `data/imap_idle.log`, Zustand `data/mail_sofort_status.json`.
+   - **Sofort-Abruf** „CEO-GPT PrimaerBau Mail-Sofort“ (`scripts/intel/idle_imap.py`): startet bei jeder Anmeldung und läuft dauerhaft. Hält je Postfach eine Leitung zu INBOX und „Gesendete Elemente“ offen (IMAP IDLE, 6 Leitungen). Neue Mails sind spätestens nach etwa 30 Sekunden gespeichert (siehe Besonderheit HostedOffice). Protokoll `data/imap_idle.log`, Zustand `data/mail_sofort_status.json`.
    - **Sicherheitsabgleich** „CEO-GPT PrimaerBau Mail-Abruf“ (`scripts/intel/collect_imap.py`): stündlich, alle Ordner (auch Archiv und Unterordner). Startet den Sofort-Abruf neu, falls der länger als 15 Minuten kein Lebenszeichen gibt. Protokoll `data/imap_collect.log`.
 
 ### Wie der Sofort-Abruf arbeitet
 
 - Öffnet die Ordner nur zum Lesen (EXAMINE) und holt mit BODY.PEEK: nichts wird als gelesen markiert, verschoben oder gelöscht.
-- Erneuert das Warten (IDLE) alle 5 Minuten (Regel: spätestens nach 29) und gleicht dabei jedes Mal ab.
+- Beendet das Warten (IDLE) alle 30 Sekunden, öffnet den Ordner neu und schaut selbst nach (Regel: spätestens nach 29 Minuten erneuern).
 - Merkt sich je Ordner die letzte gespeicherte Mail-Nummer (UID + UIDVALIDITY in `mail_folders`) und schreibt sie erst **nach** dem Speichern fort. Doppelte Meldungen erzeugen keine doppelten Einträge.
 - Bricht die Leitung ab (Internet weg, PC im Ruhezustand), verbindet er neu: erst nach 5 Sekunden, dann immer länger bis höchstens 5 Minuten. Danach holt er alles nach, was seit der letzten gespeicherten Mail kam.
 - Läuft nie doppelt (Sperrdatei `data/imap_idle.lock`). Stürzt er ab, startet Windows ihn nach 1 Minute neu.
-- Besonderheit HostedOffice: Die „nächste Nummer“ (UIDNEXT), die der Server im geöffneten Ordner meldet, ist veraltet. Der Abruf fragt deshalb immer direkt nach neuen Nummern.
+- **Besonderheit HostedOffice (getestet 14.10.2026 mit zwei echten Mails von Arber):**
+  1. Neue Mails im Posteingang meldet der Server per IDLE nicht zuverlässig: 5 Minuten lang kam keine Meldung (bei Entwürfen kam sie nach 1–2 s). Deshalb das eigene Nachschauen alle 30 Sekunden. Streng genommen ist das also „IDLE plus 30-Sekunden-Nachschauen“, kein reiner Ereignisbetrieb.
+  2. Eine offene Leitung zeigt einen eingefrorenen Ordnerstand. Darum wird der Ordner vor jedem Abgleich neu geöffnet.
+  3. Die Suche (SEARCH) kennt neue Mails erst verzögert. Neue Mails werden deshalb direkt über ihre Nummer (UID FETCH) geholt, auch im stündlichen Abgleich (`uids_after` in `collect_imap.py`). Mit der Suche hätte eine Mail sonst dauerhaft übersprungen werden können.
 
 ## Sicherheit
 
@@ -48,7 +51,7 @@ Server: `mail.de2.hostedoffice.ag`, Port 993 (SSL), Anmeldung mit Mailadresse + 
 
 ## Offen
 
-- **Abnahme mit echter Mail in INBOX** steht noch aus (Test bisher mit zwei Entwürfen im Ordner „Entwürfe“ bei pb_luljeta: Ankunft nach 1–2 s, Nachholen nach Neustart geprüft). Die zwei Test-Entwürfe „IDLE-Test …“ kann Luljeta löschen.
+- **Abnahme:** Nachholen nach Neustart mit zwei echten Mails geprüft (Arber an info@, 14.10.). Die Ankunft binnen einer Minute ohne Neustart wird mit einer dritten Test-Mail bestätigt. Die zwei Test-Entwürfe „IDLE-Test …“ kann Luljeta löschen.
 - Der Sofort-Abruf läuft nur, wenn der PC an und Luljeta angemeldet ist. Ein Dienst ohne Anmeldung wäre der nächste Schritt (bräuchte das Windows-Passwort in der Aufgabe).
 - Die Datenbank speichert nur Kopf und Textanfang (v1). Volltext und Anhänge kommen live über MCP.
 - MUBA-Postfächer (Microsoft 365) folgen über `intelligenz-outlook` (Plan `plans/2026-10-14-fernzugang-und-mailzugriff.md`, Teil 3).

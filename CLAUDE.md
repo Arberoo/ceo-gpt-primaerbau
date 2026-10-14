@@ -201,7 +201,7 @@ Setzt mittendrin einen Speicherpunkt, prüft die Doku und schreibt das Logbuch f
 
 ### Mails (Werkzeuge, kein Befehl)
 
-- **PrimärBau-Postfächer** (l.bajraktari@, info@, rechnung@primaerbau.com): live über die MCP-Werkzeuge `mail_pb_luljeta`, `mail_pb_info`, `mail_pb_rechnung` (IMAP bei HostedOffice). Lesen, suchen, **nur Entwürfe**. Senden, Löschen, Verschieben sind gesperrt. Volltextsuche über alles: Tabelle `mail_messages` in `data/data.db`. Neue Mails kommen dort **sofort** an (Windows-Aufgabe „CEO-GPT PrimaerBau Mail-Sofort“, IMAP IDLE), dazu stündlich ein Sicherheitsabgleich aller Ordner. Läuft er? `.venv\Scripts\python.exe -X utf8 scripts\intel\idle_imap.py --status`. Doku: `docs/mail-imap-primaerbau.md`.
+- **PrimärBau-Postfächer** (l.bajraktari@, info@, rechnung@primaerbau.com): live über die MCP-Werkzeuge `mail_pb_luljeta`, `mail_pb_info`, `mail_pb_rechnung` (IMAP bei HostedOffice). Lesen, suchen, **nur Entwürfe**. Senden, Löschen, Verschieben sind gesperrt. Volltextsuche über alles: Tabelle `mail_messages` in `data/data.db`. Neue Mails kommen dort binnen etwa 30 Sekunden an (Windows-Aufgabe „CEO-GPT PrimaerBau Mail-Sofort“, IMAP IDLE), dazu stündlich ein Sicherheitsabgleich aller Ordner. Läuft er? `.venv\Scripts\python.exe -X utf8 scripts\intel\idle_imap.py --status`. Doku: `docs/mail-imap-primaerbau.md`.
 - **MUBA-Postfächer:** vorerst nur über das Outlook am PC (`docs/mail-zugriff-outlook.md`), Microsoft Graph folgt.
 
 ### /task-audit
