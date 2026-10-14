@@ -1,41 +1,50 @@
 # Strategie
 
 > Diese Datei beschreibt deine aktuellen Prioritäten, jährlich, quartalsweise oder projektbezogen. Dein Mitarbeiter liest sie, um zu wissen, worauf du gerade hinarbeitest, und um als Mitdenker an deinen Zielen zu helfen.
+>
+> Stand: 14.10.2026.
 
 ---
 
 ## Wie das zusammenhängt
 
-- **`business-info.md`** beschreibt das Business drumherum
-- **`personal-info.md`** beschreibt deine Rolle und Verantwortung
-- **Diese Datei** sagt, wie Erfolg gerade aussieht
-- **`current-data.md`** zeigt den Fortschritt
+- **`business-info.md`** beschreibt das Business
+- **`personal-info.md`** beschreibt deine Rolle darin
+- **Diese Datei** beschreibt, worauf du gerade hinarbeitest
+- **`current-data.md`** zeigt die Zahlen dazu
 
 ---
 
 ## Aktuelle Phase
 
-<Welches Quartal, welches Jahr, welcher Zeitraum? Was ist das Großbild gerade?>
+**Übernahme und Neuaufbau.** Die Familie hat die PrimärBau 2026 übernommen. Die Firma macht jeden Monat Verlust, erholt sich aber durch den großen Auftrag der Bayerischen BauUnion. Parallel laufen der Insolvenzantrag der MUBA Service GmbH und die noch offene Übertragung der Anteile.
 
 ## Nordstern
 
-<Das eine Ziel, das alles andere überragt. Was wäre der größte Wurf in diesem Zeitraum?>
+**Die PrimärBau wieder profitabel machen, mit Luljeta als Eigentümerin, und so, dass sie am Unternehmen arbeitet statt im Tagesgeschäft unterzugehen.**
 
 ## Strategische Hebel
 
-<Drei bis fünf Hebel, an denen du gerade ziehst, um den Nordstern zu erreichen.>
+1. **Anteile übertragen:** 100 % von der Bayerischen BauUnion auf Luljeta, möglichst schnell
+2. **Altlasten sauber abarbeiten:** MUBA-Insolvenz (Zuarbeit für den Insolvenzverwalter), Forderungen aus der Zeit vor der Übernahme
+3. **Grundlast sichern:** Die Aufträge von Protegat sollen von MUBA auf PrimärBau übergehen, um die laufenden Kosten zu decken
+4. **Neue Kunden gewinnen:** Kaltakquise über die Vertriebs-Maschine (Architekten, Hausverwaltungen, Bauträger), Empfehlungen, geplant auch Anzeigen auf Instagram
+5. **Büro entlasten:** Ordnung in Mails und Ablage, Buchhaltung weitgehend automatisieren, TEAM3 in Betrieb nehmen
 
-1. <Hebel>
-2. <Hebel>
-3. <Hebel>
+## Wie Erfolg aussieht (nächste 3 bis 6 Monate)
 
-## Wie Erfolg aussieht
-
-<Wenn die nächsten drei bis sechs Monate gut laufen, was ist dann anders?>
+- Die Anteile gehören Luljeta
+- Kein Monat mehr mit Verlust
+- Die Buchhaltung läuft jeden Monat pünktlich, ohne dass Luljeta sie selbst machen muss
+- Das Postfach ist im Griff: Jede Mail hat einen Status, Antworten liegen als Entwurf bereit
+- Keine verpasste Frist bei Ämtern, Gerichten oder MUBA
 
 ## Offene Fragen
 
-<Wo bist du noch unsicher? Welche Entscheidungen stehen an?>
+- **TEAM3:** Luljeta müsste es lernen, oder der Mitarbeiter übernimmt die Arbeit darin. Festgelegt ist bisher: TEAM3 wird nicht ferngesteuert. Erst klärt der IT-Dienstleister, ob dieser PC die TEAM3-Daten auf dem Server lesen kann. Sonst legt TEAM3 Exporte in einen freigegebenen Ordner.
+- **Steuerkanzlei:** Wann kommt der Wechsel von DATEV zu Diana Rohrbach (Agenda)? Davon hängt ab, wohin Belege hochgeladen werden.
+- **Protegat:** Wann gehen die Aufträge auf PrimärBau über?
+- **Was unterscheidet PrimärBau von der Konkurrenz?** Noch nicht ausformuliert.
 
 ---
 

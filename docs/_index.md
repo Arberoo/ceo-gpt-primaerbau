@@ -14,7 +14,7 @@
 
 | Bedingung | Doku | Zusammenfassung |
 |---|---|---|
-| _(Dokus erscheinen hier, sobald du Systeme baust, der /commit Befehl trägt sie automatisch ein)_ | | |
+| Arbeit an Git, GitHub-Backup, Token, nächtlicher Sicherung | `docs/absicherung-windows.md` | Ort, Zugang (fine-grained Token), Windows-Aufgabe 23:45, Fehlerbehebung |
 
 ## Integrationen
 

@@ -1,40 +1,52 @@
 # Persönliche Info
 
 > Diese Datei beschreibt, wer du bist und wofür dieses CEO-GPT dich unterstützen soll. Dein Mitarbeiter liest sie bei `/prime`, um deine Rolle zu kennen und die Hilfe darauf zuzuschneiden.
+>
+> Stand: 14.10.2026, aus dem Gespräch mit Luljeta.
 
 ---
 
 ## Wie das zusammenhängt
 
-- **`business-info.md`** beschreibt das Business drumherum
+- **`business-info.md`** beschreibt das Business
 - **Diese Datei** beschreibt deine Rolle darin
 - **`strategy.md`** beschreibt, worauf du gerade hinarbeitest
-- **`current-data.md`** zeigt die Kennzahlen, die deine Entscheidungen tragen
+- **`current-data.md`** zeigt die Zahlen dazu
 
 ---
 
 ## Wer du bist
 
-**Name:** <Vorname>
-**Rolle:** <Geschäftsführer, Gründer, Operations, Marketing, etc.>
-
-<Ein bis zwei Sätze, was du im Business tust.>
+Du bist **Luljeta Bajraktari**, Geschäftsführerin der PrimärBau GmbH. Vorher war die Familie in der MUBA Service GmbH tätig, die jetzt im Insolvenzantrag steckt. Bei MUBA-Schriftverkehr bist du die Ansprechpartnerin. Dein Mann Musli leitet die Baustellen, deine Tochter Edona macht Angebote, Rechnungen und Buchhaltung, dein Sohn Arber betreut dieses CEO-GPT.
 
 ## Was du machst
 
-<Was sind deine Hauptverantwortungen? Wo geht der Großteil deiner Zeit hin? Welche Entscheidungen landen auf deinem Tisch?>
+- **E-Mails beantworten** aus fünf Postfächern (drei PrimärBau, zwei MUBA): Ämter, Lieferanten, Subunternehmer, Kunden, Insolvenz
+- **Rechtliches und Behörden:** SOKA-BAU, BG BAU, Finanzamt, Klagen gegen die Firma beantworten
+- **MUBA-Schriftverkehr:** Unterlagen scannen, hochladen, beantworten, dem Insolvenzverwalter zuarbeiten
+- **Buchhaltung und Zahlungen:** Belege zu DATEV hochladen, Rechnungen bezahlen und hochladen, Bestellungen, viel Hin und Her per Mail mit der Buchhaltung
+- **Ablage**
+- **Interne Meetings** und Abläufe im Unternehmen
 
-## Was du nicht machst
+## Was dich am meisten Zeit kostet
 
-<Was liegt bei anderen im Team oder ist explizit nicht deine Baustelle?>
+- **Das Durcheinander im Mailverkehr.** Es gibt noch keine Struktur, was wo hingehört und was offen ist.
+- **Die Buchhaltung.** Die würdest du am liebsten sofort komplett abgeben.
 
 ## Wofür du diesen CEO-GPT nutzen willst
 
-<Was wäre am wertvollsten? Analysen, Content, Strategie, Operations, Automatisierung, etwas anderes?>
+**Am Unternehmen arbeiten statt im Unternehmen.** Konkret:
+1. Mails sortieren und Antworten fertig vorbereiten, mit den nötigen Unterlagen
+2. Buchhaltung so weit wie möglich abnehmen
+3. Fristen, Rechtliches und MUBA-Verfahren im Blick halten
+4. Überblick: Was ist offen, was brennt, was ist erledigt
 
-## Hintergrund
+## Wie der Mitarbeiter mit dir arbeitet
 
-<Etwas zu deinen Skills, deinem Arbeitsstil, deinen Vorlieben? Eher technisch oder nicht? Allein oder im Team?>
+- **Duzen, einfach sprechen**, keine Fachwörter. Du bist nicht technisch.
+- **Du diktierst oft per Sprache (Voicely.de).** Namen und Fachwörter können falsch transkribiert sein, im Zweifel kurz nachfragen.
+- **Vorbereiten darf er alles ohne Rückfrage:** suchen, lesen, prüfen, Entwürfe anlegen.
+- **Abschicken, hochladen, bezahlen, löschen nur nach deinem Ja**, jedes Mal einzeln.
 
 ---
 

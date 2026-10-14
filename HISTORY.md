@@ -8,18 +8,13 @@
 
 ---
 
-## YYYY-MM-DD
-
-### Erstes Setup
-
-- CEO-GPT mit Kontext und Absicherung initialisiert
-- Git aufgesetzt und mit GitHub verbunden
-- Doku-System angelegt (docs/ Ordner mit Routing-Index)
-- /commit Befehl installiert für strukturierte Commits mit automatischer Doku
-
 ## 2026-10-14
 
-### Auto-Sicherung 2026-10-14
-- 2 Datei(en) automatisch gesichert und gepusht
-- (aus dem Diff erfasst, keine Gesprächsdetails verfügbar)
-
+### Absicherung eingerichtet (Arber und Luljeta)
+- CEO-GPT aus dem MUBA-OneDrive nach `C:\CEO-GPT-PrimaerBau` kopiert (unabhängig vom MUBA-Microsoft-Konto); alte Kopie liegt noch im OneDrive
+- Python 3.12 und GitHub CLI installiert (winget); GitHub CLI ist bewusst NICHT angemeldet
+- Git eingerichtet, Speicherpunkte unter dem Namen „PrimärBau“
+- Privates Repo `Arberoo/ceo-gpt-primaerbau`; Zugriff nur über fine-grained Token (nur dieses Repo, Contents: Read and write, läuft nie ab), hinterlegt in der Windows-Anmeldeinformationsverwaltung via `scripts/github_token_hinterlegen.ps1`
+- Schutzliste (.gitignore) erweitert: .pst/.msg/.eml, PDFs, Office-Dateien, Bilder, `context/import/` bleiben lokal
+- Nächtliche Sicherung 23:45 über die Windows-Aufgabenplanung („CEO-GPT PrimaerBau Sicherung“), Probelauf erfolgreich
+- HISTORY.md, docs/-System und `/commit` Befehl angelegt, `/prime` liest Logbuch und Doku-Index
