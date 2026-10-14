@@ -48,5 +48,5 @@
 ### MUBA-Postfächer über Microsoft Graph (Arber, nachts)
 - Entra-App „CEO-GPT PrimaerBau Mail“ im MUBA-Mandanten (nur dieser Mandant, Rechte User.Read, offline_access, Mail.ReadWrite, **kein Mail.Send**, Admin-Zustimmung erteilt)
 - Softeria ms-365-mcp v0.113.0 lokal gebaut (Node 24, `npm run generate`), offline_access-Patch, Starter `scripts/intel/ms365_mcp_run.py` nur mit Lese- und Entwurfswerkzeugen, MCP `mail_muba`
-- l.bajraktari@muba-service-gmbh.de angemeldet, Lesen getestet; info@ offen
+- l.bajraktari@ und info@muba-service-gmbh.de angemeldet (beides eigene Konten), Lesen getestet
 - Luljetas MUBA-Konto ist Globaler Administrator; Abklärung mit Insolvenzverwalter offen

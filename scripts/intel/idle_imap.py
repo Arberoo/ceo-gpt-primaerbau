@@ -207,13 +207,13 @@ def watch(account: dict, folder: str) -> None:
                 # und wenn der Server mehr kennt als geholt wurde, sofort neu anmelden.
                 mb.folder.set(folder, readonly=True)
                 n, behind = sync_new(conn, label, mb, folder)
-                if behind and behind != known_gap:
-                    raise StaleView(f"Server kennt UIDNEXT {behind}, Leitung sieht die Mail nicht")
                 fields = {"letzter_abgleich": _now(), "zustand": "verbunden"}
                 if n:
                     fields["letzte_neue"] = _now()
                     log.info("%s: +%d neue Mail(s) gespeichert", key, n)
                 set_status(key, **fields)
+                if behind and behind != known_gap:
+                    raise StaleView(f"Server kennt UIDNEXT {behind}, Leitung sieht die Mail nicht")
         except StaleView as e:
             log.info("%s: %s, melde neu an", key, e)
         except Exception as e:

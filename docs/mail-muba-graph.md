@@ -15,7 +15,9 @@
 | Postfach | Stand |
 |---|---|
 | l.bajraktari@muba-service-gmbh.de | angemeldet 15.10.2026, Lesen getestet |
-| info@muba-service-gmbh.de | offen: eigenes Konto (dann anmelden) oder freigegebenes Postfach (dann zusätzlich `Mail.ReadWrite.Shared` + Shared-Werkzeuge)? |
+| info@muba-service-gmbh.de | eigenes Konto, angemeldet 15.10.2026, Lesen getestet |
+
+Bei mehreren Postfächern im Werkzeug immer `account` angeben (z. B. `"account": "info@muba-service-gmbh.de"`). Ohne Angabe gilt das als „selected“ markierte Postfach (l.bajraktari@).
 
 ## Pflege
 
