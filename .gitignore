@@ -80,3 +80,6 @@ context/import/**
 
 # --- Mail-Konten (Server-Daten, bleiben lokal) ---
 config/imap-accounts.json
+
+# --- Lokal gebaute Werkzeuge (z.B. ms-365-mcp) ---
+tools/
