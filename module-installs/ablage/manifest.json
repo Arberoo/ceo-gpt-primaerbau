@@ -1,0 +1,63 @@
+{
+  "name": "ablage",
+  "version": "1.0.1",
+  "titel": "Automatische Ablage",
+  "kurz": "Dateien reinziehen, KI liest sie aus und ordnet sie ein. Eine Freigabe für den ganzen Stapel.",
+  "beschreibung": "Ein Eingang, ein Agent, eine Ablage-Logik. Der Geschäftsführer zieht Dateien in den Cockpit-Tab, ein Agent liest jede vollständig aus (PDF, Word, Excel, Scans, Fotos), erkennt worum es geht und schlägt für den ganzen Stapel vor, wohin sie gehören und wie sie heißen sollen. Ein Klick legt alles ab. Die KI wählt dabei aus einer Liste echter Ordner und kann strukturell keinen Pfad erfinden.",
+  "gruppe": "cockpit-erweiterung",
+  "braucht": [
+    "cockpit"
+  ],
+  "optional": [
+    "life"
+  ],
+  "ziele": [
+    "Google Drive",
+    "Ordner auf der Platte (auch Netzlaufwerk/Samba)",
+    "Dokumentenakte (mit life-Modul)"
+  ],
+  "eingriff": {
+    "neue_dateien": [
+      "apps/dashboard/ablage.py",
+      "apps/dashboard/ablage_drive.py",
+      "apps/dashboard/ablage_eingang.py",
+      "apps/dashboard/ablage_leser.py",
+      "apps/dashboard/ablage_struktur.py",
+      "apps/dashboard/ablage_ziele.py",
+      "apps/dashboard/agents/ablage_agent.py",
+      "apps/dashboard/static/views/ablage.js",
+      "scripts/test_ablage.py"
+    ],
+    "gepatcht": [
+      "apps/dashboard/api.py (Modul registrieren)",
+      "apps/dashboard/static/app.js (View importieren)",
+      "apps/dashboard/agent_runner.py (Agent registrieren)",
+      "apps/dashboard/belege.py (Ablage als Belegquelle)",
+      "apps/dashboard/passkey.py (Endpunkt hinter das Schloss, falls vorhanden)",
+      "apps/dashboard/agents/actions_tools.py (Aktion datei_ablegen)",
+      "apps/dashboard/agent_actions.py (Executor)"
+    ],
+    "neue_tabellen": [
+      "ablage_eingang",
+      "ablage_verlauf"
+    ],
+    "nicht_angefasst": [
+      "beleg_drive.py und der Buchhaltungs-Weg: Rechnungen erkennt die Ablage und lässt sie liegen"
+    ]
+  },
+  "einrichtung": "scripts/install.py, danach scripts/setup.py (Interview)",
+  "selbsttest": "scripts/test_ablage.py",
+  "erstellt": "2026-08-31",
+  "updated": "2026-09-09",
+  "changelog": "CHANGELOG.md",
+  "content_ingestion": {
+    "standard_version": "1.0.0",
+    "scope": "installation_requirements",
+    "default_mode": "file_events",
+    "recommendation": "Originaldatei direkt beim Upload bzw. abgeschlossenem Dateieingang verfügbar.",
+    "reference": "reference/dateneingang.md",
+    "ai_steps_require_consent": true,
+    "runtime_changed_by_this_release": false,
+    "target_setup_verification": "required"
+  }
+}

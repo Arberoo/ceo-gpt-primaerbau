@@ -1,0 +1,15 @@
+{
+  "version": "1.1.1",
+  "updated": "2026-09-09",
+  "changelog": "CHANGELOG.md",
+  "content_ingestion": {
+    "standard_version": "1.0.0",
+    "scope": "installation_requirements",
+    "default_mode": "provider_push",
+    "recommendation": "Microsoft-Graph-Benachrichtigungen für freigegebene Postfächer und Kalender.",
+    "reference": "reference/dateneingang.md",
+    "ai_steps_require_consent": true,
+    "runtime_changed_by_this_release": false,
+    "target_setup_verification": "required"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "_hinweis": "Vorlage. Normalerweise schreibt scripts/setup.py diesen Block. Hier steht er zum Nachschlagen, mit allen Möglichkeiten nebeneinander.",
+
+  "ablage": {
+    "drives": ["Ordner A", "Projekte", "Vertrieb"],
+    "_drives": "Google-Drive-Bereiche, die die Ablage benutzen darf. Weglassen, wenn kein Drive im Spiel ist.",
+
+    "lokal": {"basis": "/pfad/zur/ablage", "tiefe": 2},
+    "_lokal": "Ordner auf der Platte (auch Netzlaufwerk/Samba). Gescannt wird bis `tiefe` Ebenen. Weglassen, wenn nur Drive genutzt wird.",
+
+    "auffang_folder_id": "",
+    "_auffang_folder_id": "Auffang IM DRIVE (Ordner-ID). Alles, was sich nicht sicher zuordnen lässt, landet hier.",
+
+    "auffang_pfad": "",
+    "_auffang_pfad": "Auffang AUF DER PLATTE. Alternative zu auffang_folder_id; ist beides gesetzt, gewinnt der Pfad.",
+
+    "gesperrte_pfade": ["Projekte/01 Kunden/*/Freigegeben"],
+    "_gesperrte_pfade": "Hier wird NIE abgelegt. Typischer Fall: ein Ordner, den Kunden oder Externe einsehen können. Muster mit * erlaubt.",
+
+    "drive_token": "",
+    "_drive_token": "Nur nötig, wenn der Drive-Zugang woanders liegt als data/google-recordings-token.json.",
+
+    "max_je_stapel": 15,
+    "_max_je_stapel": "Wie viele Dateien höchstens in einem Zug eingeordnet werden."
+  },
+
+  "modules": { "ablage": true },
+  "demo": { "surfaces": { "ablage": "hide" } },
+  "_demo": "Der Tab zeigt Inhalte echter Dokumente. Im Demo-/Verkaufsmodus gehört er versteckt."
+}

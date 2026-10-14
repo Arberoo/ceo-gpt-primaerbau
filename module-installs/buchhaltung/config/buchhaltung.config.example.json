@@ -1,0 +1,69 @@
+{
+  "_info": "Anpassungsschicht der Buchhaltung. Alles Nutzerspezifische steht hier, Engine, Reminder und Skill lesen daraus. Beim Install fuellt der Mitarbeiter diese Datei aus den Setup-Antworten. Diese Beispiel-Datei enthaelt nur neutrale Platzhalter.",
+
+  "language": "de",
+  "currency": "EUR",
+  "year": 2026,
+  "folder_root": "<absoluter Pfad zum Buchhaltungsordner, z.B. ~/Buchhaltung oder ein Cloud-Mount>",
+
+  "owner_name": "<Inhaber/Gesellschafter, fuer Erkennung von Eigeneinlagen 'from/to <Name>'>",
+  "company_legal_name": "<optional: Firmenname, fuer interne Umbuchungen>",
+
+  "bank_sources": [
+    {
+      "name": "<Bankname, z.B. die Bank des Nutzers>",
+      "preset": "revolut",
+      "csv_column_map": null,
+      "internal_patterns": [],
+      "fee_type": "FEE"
+    }
+  ],
+
+  "company_keywords": [],
+
+  "categories": {
+    "income": [
+      { "match_reference": "<Rechnungsnummer-Praefix, z.B. RE->", "label": "Umsatz (Ausgangsrechnung)" },
+      { "match_description": ["<Stichwort einer Einnahmequelle>"], "label": "Umsatz (sonstige)" }
+    ],
+    "expense": [
+      { "match_description": ["<Vendor- oder Kostenstichwort>"], "label": "Software & SaaS" },
+      { "match_description": ["<Behoerde/Versicherung>"], "label": "Abgaben & Versicherung", "no_receipt": true }
+    ]
+  },
+
+  "no_receipt_rules": {
+    "fees": true,
+    "internal_transfers": true,
+    "authority_keywords": []
+  },
+
+  "private_expenses": {
+    "enabled": true,
+    "folder": "5 Private & Cash",
+    "list_file": "Auslagen_privat_{year}.csv",
+    "ask_monthly": true
+  },
+
+  "folders": {
+    "contracts": "00 Contracts & Records",
+    "sales": "1 Sales Invoices",
+    "purchases": "2 Purchase Invoices",
+    "expenses": "3 Expenses",
+    "bank": "4 Bank Statements",
+    "private": "5 Private & Cash"
+  },
+
+  "accountant": {
+    "name": "<Steuerberater>",
+    "email": "<steuerberater@example.com>",
+    "language": "en",
+    "handover": "shared_folder",
+    "deadline_day": 10
+  },
+
+  "reminder": {
+    "channel": "telegram",
+    "send_days": [1, 5, 8, 10]
+  }
+}

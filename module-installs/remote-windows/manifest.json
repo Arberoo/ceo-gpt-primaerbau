@@ -1,0 +1,25 @@
+{
+  "modul": "remote-windows",
+  "version": "2.0.0",
+  "status": "RELEASED",
+  "released": "2026-10-10",
+  "kategorie": "Erweiterung",
+  "phase": 4,
+  "requires": [],
+  "optional": [
+    "absicherung",
+    "kontext",
+    "stimme"
+  ],
+  "setup_zeit": "Weg N 15-30 Minuten, Weg V 60-120 Minuten",
+  "komplexitaet": "mittel bis hoch",
+  "api_keys": 0,
+  "laufende_kosten": "keine",
+  "beschreibung": "Bringt das CEO-GPT auf einen immer-an Windows-PC und macht es von jedem Gerät aus nutzbar: entweder nativ auf Windows, bedient per SSH-Sitzung der Claude-Desktop-App (Weg N), oder in einer Linux-VM per Hyper-V und Tailscale (Weg V).",
+  "voraussetzungen": [
+    "Windows-PC, der durchläuft",
+    "Tailscale-Konto",
+    "Weg N: Claude Desktop ab 2.31226.0 auf jedem Gerät, OpenSSH-Server auf dem Ziel-PC",
+    "Weg V: Windows 11 Pro/Enterprise/Education, 8 GB RAM"
+  ]
+}

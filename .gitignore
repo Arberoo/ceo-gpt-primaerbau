@@ -1,0 +1,79 @@
+# ============================================================
+# CEO-GPT Arbeitsplatz, .gitignore
+# Dateien und Ordner, die nie zu Git wandern sollen.
+# Schützt deine Secrets, verhindert Bloat und hält das Repo sauber.
+# ============================================================
+
+# --- Credentials (kritisch, niemals committen) ---
+.env
+credentials/
+*.pem
+*.key
+
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# --- Daten (werden generiert, reproduzierbar aus Sammel-Scripts) ---
+data/*.db
+data/*.db-journal
+data/*.db-shm
+data/*.db-wal
+data/*.log
+
+# --- macOS ---
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# --- IDE ---
+.vscode/
+.idea/
+
+# --- Temp-Dateien ---
+*.tmp
+*.bak
+
+# --- Node (falls genutzt) ---
+node_modules/
+
+# --- Laufzeit-/Arbeitsdaten komplett (DB, Logs, Call-Prep, Caches; reproduzierbar aus Skripten) ---
+data/
+
+# --- Generierte schwere Medien & ML-Modelle (gehören nicht in Git, blocken >100MB-Pushes) ---
+*.onnx
+*.mp4
+*.mov
+*.tar.gz
+
+# --- Lokale Claude-Einstellungen (Berechtigungen, nicht teilen) ---
+.claude/settings.local.json
+
+# --- Windows ---
+Thumbs.db
+desktop.ini
+~$*
+
+# --- Postfach-Exporte und Mail-Archive (gross und vertraulich, nie zu GitHub) ---
+*.pst
+*.ost
+*.msg
+*.eml
+
+# --- Arbeitsunterlagen der Firma (bleiben lokal auf dem PC) ---
+*.pdf
+*.xlsx
+*.xls
+*.docx
+*.doc
+*.jpg
+*.jpeg
+*.png
+*.tif
+*.tiff
+*.zip
+context/import/**
+!context/import/.gitkeep
