@@ -77,3 +77,6 @@ desktop.ini
 *.zip
 context/import/**
 !context/import/.gitkeep
+
+# --- Mail-Konten (Server-Daten, bleiben lokal) ---
+config/imap-accounts.json

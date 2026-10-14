@@ -1,6 +1,6 @@
 # Mail-Zugriff über das installierte Outlook (Windows)
 
-> **Übergangslösung.** Entschieden ist (14.10.2026): Mails sollen direkt beim Anbieter gelesen werden (HostedOffice per IMAP, MUBA per Microsoft Graph), damit es in jeder Sitzung und nachts läuft. Plan: `plans/2026-10-14-fernzugang-und-mailzugriff.md`. Bis dahin gilt dieser Weg. In SSH-Sitzungen funktioniert er nicht.
+> **Übergangslösung.** Die **PrimärBau-Postfächer laufen seit 14.10.2026 über IMAP** (`docs/mail-imap-primaerbau.md`), dafür gilt dieser Weg nicht mehr. Er gilt nur noch für die **MUBA-Postfächer**, bis Microsoft Graph steht (Plan `plans/2026-10-14-fernzugang-und-mailzugriff.md`). In SSH-Sitzungen funktioniert er nicht.
 
 > Erprobt am 14.10.2026 (Fall Bayrhof/Kautz). Der Mitarbeiter liest Mails direkt aus Luljetas klassischem Outlook über die Outlook-Schnittstelle (COM) per PowerShell. Er braucht keine Passwörter, keine `.env`-Einträge und keine Module `intelligenz-outlook` oder `intelligenz-imap`.
 

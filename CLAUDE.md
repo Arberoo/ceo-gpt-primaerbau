@@ -199,6 +199,11 @@ Beispiel: `/share die Daten-Pipeline`
 
 Setzt mittendrin einen Speicherpunkt, prüft die Doku und schreibt das Logbuch fort. Nötig ist das nicht: Jede Nacht um 23:45 speichert die Windows-Aufgabe „CEO-GPT PrimaerBau Sicherung“ von allein und lädt alles ins private GitHub-Repo `Arberoo/ceo-gpt-primaerbau`. Details und Fehlerbehebung: `docs/absicherung-windows.md`.
 
+### Mails (Werkzeuge, kein Befehl)
+
+- **PrimärBau-Postfächer** (l.bajraktari@, info@, rechnung@primaerbau.com): live über die MCP-Werkzeuge `mail_pb_luljeta`, `mail_pb_info`, `mail_pb_rechnung` (IMAP bei HostedOffice). Lesen, suchen, **nur Entwürfe**. Senden, Löschen, Verschieben sind gesperrt. Volltextsuche über alles: Tabelle `mail_messages` in `data/data.db`. Doku: `docs/mail-imap-primaerbau.md`.
+- **MUBA-Postfächer:** vorerst nur über das Outlook am PC (`docs/mail-zugriff-outlook.md`), Microsoft Graph folgt.
+
 ### /task-audit
 
 Geführtes Interview, das jede wiederkehrende Aufgabe in deinem Business kartiert. Ergebnis ist eine Übersicht mit Bewertung pro Aufgabe (voll automatisierbar, teilweise, noch nicht, nur Mensch). Das ist die Grundlage für den Hand-Teil.

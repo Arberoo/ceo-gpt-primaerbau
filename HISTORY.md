@@ -25,3 +25,9 @@
 - Erster Fall: Bayrhof ./. PrimärBau (RA Dr. Kautz, Frist 23.10.2026), Akte lokal in `data/akten/`
 - MUBA-Postfächer: Outlook bei info@ und l.bajraktari@ auf „Alle“ gestellt, lädt nach; Export folgt; Anleitung Purview für Arber (`docs/muba-postfaecher-sichern.md`)
 - `/prime` legt offene Briefings aus `outputs/briefings/` zuerst vor (erstes Briefing für Luljeta am 15.10.)
+
+### Speicher-Erlaubnis, Plan, PrimärBau-Mails per IMAP (Arber)
+- Erlaubnisregeln in `.claude/settings.local.json`: git add/commit/push erlaubt, force/reset/clean verboten
+- Plan `plans/2026-10-14-fernzugang-und-mailzugriff.md`: Mails beim Anbieter, eigenes Tailscale-Konto PrimärBau mit Teilen an Arber, Edona übers Büronetz, Windows-Anmeldung absichern (Wochenende)
+- Windows-Anmeldung geprüft: kein Entra-Join, keine MUBA-Fernverwaltung, nur lose Arbeitskonto-Verknüpfung
+- `intelligenz-imap` auf Windows: drei PrimärBau-Postfächer bei HostedOffice (IMAP, IDLE-fähig), Live-MCP je Postfach **nur Entwürfe**, Backfill in data.db, Abruf alle 15 Min. per Aufgabenplanung; Abweichungen in `module-installs/intelligenz-imap/ANPASSUNGEN.md`

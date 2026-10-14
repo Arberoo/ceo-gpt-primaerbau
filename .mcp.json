@@ -1,0 +1,25 @@
+{
+  "mcpServers": {
+    "mail_pb_luljeta": {
+      "command": "C:\\CEO-GPT-PrimaerBau\\.venv\\Scripts\\python.exe",
+      "args": [
+        "C:\\CEO-GPT-PrimaerBau\\scripts\\intel\\imap_mcp_run.py",
+        "pb_luljeta"
+      ]
+    },
+    "mail_pb_info": {
+      "command": "C:\\CEO-GPT-PrimaerBau\\.venv\\Scripts\\python.exe",
+      "args": [
+        "C:\\CEO-GPT-PrimaerBau\\scripts\\intel\\imap_mcp_run.py",
+        "pb_info"
+      ]
+    },
+    "mail_pb_rechnung": {
+      "command": "C:\\CEO-GPT-PrimaerBau\\.venv\\Scripts\\python.exe",
+      "args": [
+        "C:\\CEO-GPT-PrimaerBau\\scripts\\intel\\imap_mcp_run.py",
+        "pb_rechnung"
+      ]
+    }
+  }
+}

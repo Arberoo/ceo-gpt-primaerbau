@@ -37,6 +37,8 @@
 
 ## Teil 2: PrimärBau-Postfächer per IMAP (Modul `intelligenz-imap`)
 
+> **Umgesetzt am 14.10.2026** (außer IDLE-Dauerläufer): Server `mail.de2.hostedoffice.ag:993`, Live-MCP je Postfach nur mit Entwürfen, 15-Min.-Abruf in die Datenbank. Details: `docs/mail-imap-primaerbau.md`, Abweichungen: `module-installs/intelligenz-imap/ANPASSUNGEN.md`. Offen: IDLE-Dauerläufer statt Takt.
+
 **Geschätzter Aufwand:** 45–60 Min. (Windows-Anpassungen inklusive)
 
 Offene Fragen vorab:
