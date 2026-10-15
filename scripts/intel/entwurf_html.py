@@ -8,16 +8,18 @@ und Logo in der Signatur sichtbar sind. Bewusst eng:
 - sendet nichts (kein SMTP), Empfaenger traegt Luljeta beim Abschicken selbst ein
   (optional --an fuer einen vorgegebenen Empfaenger)
 
-Signatur: Vorlage data/signatur/<name>.html mit Platzhaltern cid:foto und cid:logo,
+Signatur: Vorlage data/signatur/<name>.html (beginnt mit Name und Berufsbezeichnung fett,
+der Mailtext endet daher nur mit dem Gruss) mit Platzhaltern cid:foto und cid:logo,
 Bilder data/signatur/*.png (lokal, nie GitHub).
 
 Usage:
     python scripts/intel/entwurf_html.py pb_info --betreff "..." --text text.html \
-        --signatur luljeta [--in-reply-to "<id>"] [--an a@b.de]
+        --signatur luljeta [--in-reply-to "<id>"] [--an a@b.de] [--anhang datei ...]
 """
 
 import sys
 import argparse
+import mimetypes
 from pathlib import Path
 from email.message import EmailMessage
 from email.utils import make_msgid, formatdate
@@ -45,6 +47,7 @@ def main() -> int:
     ap.add_argument("--in-reply-to")
     ap.add_argument("--an")
     ap.add_argument("--cc")
+    ap.add_argument("--anhang", action="append", default=[], help="Datei anhaengen (mehrfach moeglich)")
     args = ap.parse_args()
 
     konto = C.load_accounts(args.konto)[0]
@@ -55,6 +58,11 @@ def main() -> int:
     for k, cid in cids.items():
         sig = sig.replace(f"cid:{k}", f"cid:{cid[1:-1]}")
     text = Path(args.text).read_text(encoding="utf-8")
+    # Name und Berufsbezeichnung stehen fett in der Signatur-Vorlage (Wunsch Luljeta, 15.10.2026).
+    # Der Mailtext endet nur mit dem Gruss, sonst stuende der Name doppelt da.
+    if "Luljeta Bajraktari" in sig and "Luljeta Bajraktari" in text:
+        print("FEHLER: Der Mailtext enthaelt den Namen schon, er kommt aus der Signatur. Text nur mit dem Gruss enden lassen.")
+        return 1
     # Luljeta schreibt in Calibri 11 pt (Outlook-Standard, geprueft 15.10.2026), Ersatz Arial
     schrift = "font-family:Calibri,Arial,sans-serif;font-size:11pt"
     html = (f"<html><head><style>body,p,div,td{{{schrift}}}</style></head>"
@@ -78,6 +86,10 @@ def main() -> int:
     for k, datei in BILDER.items():
         html_teil.add_related((SIG_DIR / datei).read_bytes(), "image", "png",
                               cid=cids[k], filename=datei, disposition="inline")
+    for pfad in map(Path, args.anhang):
+        typ = mimetypes.guess_type(pfad.name)[0] or "application/octet-stream"
+        haupt, unter = typ.split("/", 1)
+        msg.add_attachment(pfad.read_bytes(), maintype=haupt, subtype=unter, filename=pfad.name)
 
     mb = C.connect(konto)
     try:
