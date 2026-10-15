@@ -12,6 +12,9 @@ Stand: 15.10.2026, nachts
 - [ ] **Mail an Herrn Festing senden.** Entwurf liegt in info@primaerbau.com unter „Entwürfe“ (Zugangsdaten fesel@, Salzberger, karl@). Für den Fall Kautz wichtig, Frist 23.10. Wenn die Zugangsdaten kommen: verdeckt hinterlegen und anbinden lassen (Akte `data/akten/2026-444-Bayrhof-Kautz/AKTE.md`).
 - [ ] **Mail-Assistent bauen:** `/implement plans/2026-10-15-mail-assistent-posteingang.md` (nach dem PST-Export). Danach Luljeta kurz zeigen, wie sie `/posteingang` nutzt.
 
+- [ ] **Wunsch Luljeta (15.10.), als nächster Bauschritt: Scan-Ordner.** Ein fester Ordner, in den ihr Scanner speichert. Der Mitarbeiter hat immer Zugriff, erkennt neue Scans sofort (Texterkennung, Zuordnung zu Firma/Fall/Frist) und meldet sie. Passt zum Ablage-Modul (`module-installs/ablage`). Klären: Welcher Scanner, wohin speichert er heute?
+- [ ] **Wunsch Luljeta (15.10.): DATEV anbinden.** Belege und Buchhaltung direkt zu DATEV hochladen (DATEV Unternehmen online / Belegtransfer), Verbindung zur Kanzlei. Abhängig vom geplanten Kanzleiwechsel zu Diana Rohrbach (Agenda), vorher klären, welches System gilt. Hochladen bleibt „ein Klick“: nur nach Luljetas Ja.
+
 ## 🟠 Wochenende
 
 - [ ] **Insolvenzverwalter fragen:** Ist der neue Zugang „CEO-GPT PrimaerBau Mail“ im MUBA-Microsoft-Konto in Ordnung? (Entfernen: `docs/mail-muba-graph.md`)
@@ -30,10 +33,17 @@ Stand: 15.10.2026, nachts
 - [ ] **Edonas Kontext** ergänzen (`/install module-installs/kontext`, nur ihr Teil).
 - [ ] **Automatischer Morgen-Lauf** von `/posteingang` (v2): `claude setup-token`, Aufgabenplanung.
 - [ ] Optional: `CLAUDE_CODE_OAUTH_TOKEN` für schönere Texte der nächtlichen Sicherung.
+- [ ] **Empfänger-Freigabeliste `mail_pb_*`** (15.10.): Entwurf an info@eichner-elektro.de wurde abgelehnt („recipient policy denied“), Entwurf ging ohne Empfänger. Liste lockern (z. B. alle Adressen, mit denen schon Mails gewechselt wurden), sonst muss Luljeta jedes Mal die Adresse selbst eintragen.
+- [ ] **MUBA-Entwürfe wegräumen/ändern** (15.10., Luljeta wünscht das ausdrücklich und hat Dauerfreigabe für das Wegräumen alter Fassungen gegeben; heute liegen im MUBA-Postfach l.bajraktari@ je 3–4 Fassungen der Mails an von Gleichenstein und Löffler): `mail_muba` kann Entwürfe nur anlegen, nicht ändern oder löschen. Bei Korrekturen entstehen Doppel, Luljeta muss den alten selbst löschen. Analog zu `entwurf_loeschen.py` einen engen Weg über Graph (nur Entwürfe-Ordner, nur isDraft, verschieben nach Gelöschte Elemente) prüfen; Anhänge-Download (`download-bytes`) fehlt im Starter ebenfalls (Workaround: list-mail-attachments ohne $select liefert contentBytes).
+- [ ] **Sofort-Benachrichtigung bei wichtigen Absendern** (Wunsch Luljeta 15.10.): Heute prüfen zwei geplante Aufgaben alle 30 Min. (UTA, RAin Löffler), das ist ihr zu langsam. Besser ein leichter Dauerläufer ohne Claude-Lauf: PrimärBau über den vorhandenen IDLE-Abruf (`data.db`), MUBA per Graph-Abfrage alle 1–2 Min. (oder Graph-Änderungsbenachrichtigung), bei Treffer auf einer Beobachtungsliste (z. B. lexmuc.com, uta.com, gleichenstein-breitling.de, telekom.de) eine Windows-Benachrichtigung zeigen. Danach die beiden Aufgaben `uta-antwort-melden` und `loeffler-antwort-melden` abschalten.
+- [ ] **MUBA-Mails in die lokale Suche** (15.10.): Die PrimärBau-Postfächer liegen mit Volltext in `data/data.db`, die MUBA-Postfächer (Graph) nicht. Dadurch übersieht der Mitarbeiter leichter, was schon verschickt wurde (Fall Lindenstraße: Anhänge an RAin Löffler vom 27.07. nicht gesehen). Vorschlag: Graph-Abgleich der MUBA-Postfächer (Posteingang, Gesendet, Unterordner) in `mail_messages` inkl. Anhang-Namen, analog `collect_imap.py`; zusätzlich Spalte `attachment_names` für alle Postfächer.
+- [ ] **Anhänge lesen:** `get_attachment_content` ist aus (`enable_attachment_content=false`). Am 15.10. per Behelfsskript nur lesend über `imap_common` geholt. Sauberen Weg einbauen (Anhang nach `data/`, PDF-Text, Scans per OCR); `pdftoppm`/`pypdf` fehlen.
 
 ## Erledigt
 
 - [x] 14.10. Absicherung (Git, GitHub privat mit fine-grained Token, nächtliche Sicherung)
 - [x] 14.10. Kontext-Gespräch mit Luljeta
+- [x] 15.10. HTML-Entwürfe mit Signatur (Foto + Logo): `scripts/intel/entwurf_html.py`, nur APPEND in Entwürfe. Bitte bei Gelegenheit gegenlesen; ggf. später als MCP-Werkzeug.
+- [x] 15.10. Entwürfe wegräumen: `scripts/intel/entwurf_loeschen.py` (nur Entwürfe, verschiebt in den Papierkorb), freigegeben von Arber, getestet
 - [x] 14./15.10. Alle fünf Postfächer angebunden (IMAP + Graph), Sofort-Abruf per IDLE abgenommen
 - [x] 15.10. Plan Mail-Assistent (zweimal geprüft)

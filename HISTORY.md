@@ -47,6 +47,16 @@
 
 ## 2026-10-15
 
+### Arbeitstag mit Luljeta (15.10.)
+- Angebot Eichner (Elektro Theresienstr. 11) geprüft, `outputs/pruefungen/2026-10-15-angebot-eichner-theresienstr-11.md`; Rückfrage-Mail in mehreren Runden auf 4 Punkte eingekürzt (gesendet)
+- Neue Fähigkeiten (Freigabe Arber): `scripts/intel/entwurf_loeschen.py` (eigene Entwürfe in den Papierkorb), `scripts/intel/entwurf_html.py` (HTML-Entwurf mit Signatur, Foto und Logo eingebettet, Calibri 11)
+- Zahlungsbitte an BauUnion (Abschlagsrechnung 1-10-26) als Entwurf
+- UTA-Tankkarten: Verlauf ausgewertet, Kontaktformular für Kunden im Browser ausgefüllt und mit Luljetas Ja abgeschickt; stündliche Prüfung auf Antwort (geplante Aufgabe `uta-antwort-melden`)
+- Telekom: Übernahme von 4 MUBA-Nummern auf PrimärBau, Formular ausgefüllt (`outputs/telekom/`), Mails an vorl. Insolvenzverwalter und Frau Speer als Entwurf
+- Erinnerungen und Prüfungen als geplante Aufgaben (Spemann/Targobank 16.10., Unterlagen 19./22.10., Antwort RAin stündlich)
+- Neue Gedächtnis-Regeln: Calibri 11, Ton je Empfänger, nichts senden ohne gelesene Endfassung, alte Entwurfsfassungen wegräumen, vor „fehlt noch“ Gesendetes prüfen, Interna aus Mails heraushalten
+- Bau-Liste ergänzt: Scan-Ordner, DATEV, MUBA-Entwürfe löschen, MUBA-Mails in die lokale Suche, Sofort-Benachrichtigung, Empfänger-Freigabeliste, Anhänge lesen
+
 ### MUBA-Postfächer über Microsoft Graph (Arber, nachts)
 - Entra-App „CEO-GPT PrimaerBau Mail“ im MUBA-Mandanten (nur dieser Mandant, Rechte User.Read, offline_access, Mail.ReadWrite, **kein Mail.Send**, Admin-Zustimmung erteilt)
 - Softeria ms-365-mcp v0.113.0 lokal gebaut (Node 24, `npm run generate`), offline_access-Patch, Starter `scripts/intel/ms365_mcp_run.py` nur mit Lese- und Entwurfswerkzeugen, MCP `mail_muba`
