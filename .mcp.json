@@ -26,6 +26,27 @@
       "args": [
         "C:\\CEO-GPT-PrimaerBau\\scripts\\intel\\ms365_mcp_run.py"
       ]
+    },
+    "mail_pb_fesel": {
+      "command": "C:\\CEO-GPT-PrimaerBau\\.venv\\Scripts\\python.exe",
+      "args": [
+        "C:\\CEO-GPT-PrimaerBau\\scripts\\intel\\imap_mcp_run.py",
+        "pb_fesel"
+      ]
+    },
+    "mail_pb_karl": {
+      "command": "C:\\CEO-GPT-PrimaerBau\\.venv\\Scripts\\python.exe",
+      "args": [
+        "C:\\CEO-GPT-PrimaerBau\\scripts\\intel\\imap_mcp_run.py",
+        "pb_karl"
+      ]
+    },
+    "mail_pb_salzberger": {
+      "command": "C:\\CEO-GPT-PrimaerBau\\.venv\\Scripts\\python.exe",
+      "args": [
+        "C:\\CEO-GPT-PrimaerBau\\scripts\\intel\\imap_mcp_run.py",
+        "pb_salzberger"
+      ]
     }
   }
 }

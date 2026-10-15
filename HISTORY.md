@@ -8,6 +8,17 @@
 
 ---
 
+## 2026-10-15
+
+### Buchhaltung vorbereitet, Alt-Postfächer, Selbststart (Arber)
+- Fehlende Belege September für die Kanzlei Dornbach gesammelt: Mappe mit Arbeitsliste in `data/buchhaltung/2026-09-fehlende-belege/` (nur lokal), dazu die Kontenlisten der Kanzlei; Lage in `context/current-data.md`
+- DATEV: Weg „Upload Mail“ gewählt (kein Belegtransfer/Karte, Wechsel zu Agenda kommt); Entwurf an Dornbach in Luljetas Entwürfen; `entwurf_html.py` kann jetzt cc
+- Alt-Postfächer fesel@, karl@, salzberger@ nur lesend angebunden (Abgleich und Live-Werkzeuge, Entwürfe gesperrt, kein Sofort-Abruf); Auswertung Fall Bayrhof in der Akte
+- `/prime` läuft automatisch beim Sitzungsstart (Hook `scripts/sitzung_start.py`)
+- Regel: Nachziehen, Speichern und Hochladen ins Sicherungs-Repo macht der Mitarbeiter selbstständig
+
+---
+
 ## 2026-10-14
 
 ### Auto-Sicherung 2026-10-14

@@ -290,7 +290,9 @@ def main() -> int:
 
     conn = db()
     C.ensure_tables(conn)
-    accounts = C.load_accounts()
+    # Alt-Postfaecher ausgeschiedener Mitarbeiter (nur_archiv) bekommen keine neuen Mails,
+    # die holt der stuendliche Abgleich mit.
+    accounts = [a for a in C.load_accounts() if not a.get("nur_archiv")]
     for a in accounts:
         C.upsert_account(conn, a)
     conn.close()

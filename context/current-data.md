@@ -30,7 +30,7 @@
 | Was | Frist | Stand |
 |---|---|---|
 | **Bayrhof ./. PrimärBau (RA Dr. Kautz, Az. 444/26):** 24.267,08 € aus Schlussrechnung RE2025-0000669 (Neuhoferstr. 4, Augsburg). Antwort **mit Lösungsvorschlag**, sonst Klage beim LG Augsburg. Akte: `data/akten/2026-444-Bayrhof-Kautz/AKTE.md` | **Fr 23.10.2026** | offen, höchste Priorität |
-| **Buchhaltung September 2026** fertig machen und hochladen | schnell | offen |
+| **Buchhaltung September 2026** fertig machen und hochladen (Kanzlei Dornbach, Fabian Schmitz). Fehlende Belege sind vorbereitet: Mappe und Arbeitsliste `data/buchhaltung/2026-09-fehlende-belege/ARBEITSLISTE.md` (Rechnungen aus den Postfächern, Kontenlisten der Kanzlei, was noch fehlt). Hochladen in DATEV Unternehmen online macht Luljeta selbst (Anmeldung per Handy-App). Entwurf an Dornbach zu „Upload Mail“ liegt in ihren Entwürfen. | **10.11.2026** | vorbereitet 15.10., Luljeta arbeitet die Liste ab |
 | **MUBA:** Unterlagen zusammenstellen und an den Insolvenzverwalter schicken | laufend | offen, viel Schriftverkehr |
 | **Übertragung der Anteile** an Luljeta | so schnell wie möglich | vereinbart, nicht vollzogen |
 | **Freistellungsbescheinigung** beim Finanzamt beantragen (Bauabzugsteuer) | bald | offen, fällt Luljeta schwer |

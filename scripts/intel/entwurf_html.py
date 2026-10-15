@@ -44,6 +44,7 @@ def main() -> int:
     ap.add_argument("--signatur", default="luljeta", help="Name der Vorlage in data/signatur/")
     ap.add_argument("--in-reply-to")
     ap.add_argument("--an")
+    ap.add_argument("--cc")
     args = ap.parse_args()
 
     konto = C.load_accounts(args.konto)[0]
@@ -63,6 +64,8 @@ def main() -> int:
     msg["From"] = f"{konto.get('full_name', 'PrimärBau GmbH')} <{konto['username']}>"
     if args.an:
         msg["To"] = args.an
+    if args.cc:
+        msg["Cc"] = args.cc
     msg["Subject"] = args.betreff
     msg["Date"] = formatdate(localtime=True)
     msg["Message-ID"] = make_msgid(domain=domain)

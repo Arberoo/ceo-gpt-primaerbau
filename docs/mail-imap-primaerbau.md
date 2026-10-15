@@ -10,6 +10,14 @@
 | info@primaerbau.com | `pb_info` | `mail_pb_info` | 6.065, ab 2015, 207 Ordner |
 | rechnung@primaerbau.com | `pb_rechnung` | `mail_pb_rechnung` | 1.156, ab 04/2023 |
 
+**Alt-Postfächer ausgeschiedener Mitarbeiter** (seit 15.10.2026, nur lesen, auch keine Entwürfe: `save_draft` ist in `.claude/settings.local.json` verboten). Kennzeichen `"nur_archiv": true` in `config/imap-accounts.json`: kein Sofort-Abruf (`idle_imap.py` lässt sie aus), nur stündlicher Abgleich. Zugang von EDV-Festing, Passwörter `IMAP_PW_PB_FESEL|KARL|SALZBERGER`. **HostedOffice löscht die Postfächer am 28.02.2027**, vorher vollständige lokale Kopie ziehen. Nur gezielt Geschäftliches suchen (z. B. Fall Bayrhof, Rechnungen).
+
+| Postfach | Label | Live-Werkzeug (MCP) | Mails (15.10.) |
+|---|---|---|---|
+| fesel@primaerbau.com (früherer Geschäftsführer) | `pb_fesel` | `mail_pb_fesel` | ca. 23.800, 841 Ordner |
+| karl@primaerbau.com | `pb_karl` | `mail_pb_karl` | ca. 9.500, 223 Ordner |
+| salzberger@primaerbau.com (früherer Bauleiter) | `pb_salzberger` | `mail_pb_salzberger` | 79, 08/2023–02/2026 |
+
 Server: `mail.de2.hostedoffice.ag`, Port 993 (SSL), Anmeldung mit Mailadresse + Postfach-Passwort. Kann IDLE (sofortige Meldung neuer Mails).
 
 ## Zwei Wege

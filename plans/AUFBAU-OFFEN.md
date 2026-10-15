@@ -13,7 +13,14 @@ Stand: 15.10.2026, nachts
 - [ ] **Mail-Assistent bauen:** `/implement plans/2026-10-15-mail-assistent-posteingang.md` (nach dem PST-Export). Danach Luljeta kurz zeigen, wie sie `/posteingang` nutzt.
 
 - [ ] **Wunsch Luljeta (15.10.), als nächster Bauschritt: Scan-Ordner.** Ein fester Ordner, in den ihr Scanner speichert. Der Mitarbeiter hat immer Zugriff, erkennt neue Scans sofort (Texterkennung, Zuordnung zu Firma/Fall/Frist) und meldet sie. Passt zum Ablage-Modul (`module-installs/ablage`). Klären: Welcher Scanner, wohin speichert er heute?
-- [ ] **Wunsch Luljeta (15.10.): DATEV anbinden.** Belege und Buchhaltung direkt zu DATEV hochladen (DATEV Unternehmen online / Belegtransfer), Verbindung zur Kanzlei. Abhängig vom geplanten Kanzleiwechsel zu Diana Rohrbach (Agenda), vorher klären, welches System gilt. Hochladen bleibt „ein Klick“: nur nach Luljetas Ja.
+- [x] **/prime automatisch** (15.10.): Start-Hook in `.claude/settings.json` → `scripts/sitzung_start.py`. Prüfen in der nächsten echten Sitzung von Luljeta, ob die Begrüßung beim ersten Satz kommt (Hooks greifen erst in neuen Sitzungen).
+- [x] **Alt-Postfächer fesel@, karl@, salzberger@ angebunden** (15.10.): Konten mit `nur_archiv`, aus dem Sofort-Abruf ausgenommen, MCP `mail_pb_fesel|karl|salzberger` nur lesen (Entwürfe gesperrt), eingelesen in `mail_messages`. Doku `docs/mail-imap-primaerbau.md`. Live-Werkzeuge erst nach Neustart der Sitzung.
+- [ ] **Alt-Postfächer vor dem 28.02.2027 vollständig lokal sichern** (.eml samt Anhängen), danach löscht HostedOffice sie. Zugangsdaten-Mail von Festing (15.10., info@, Klartext-Passwörter) danach von Luljeta löschen lassen.
+- [ ] **DATEV Upload Mail bei Dornbach angefragt** (Entwurf 15.10. in l.bajraktari@, Luljeta sendet). Entscheidung Arber 15.10.: kein Belegtransfer, keine SmartCard/mIDentity, weil der Wechsel zu Diana Rohrbach bald kommt. Danach **Agenda**: Belege im Browser hochladen (so macht Arber es schon in seinem CEO-GPT), Luljeta meldet sich an, Mitarbeiter bereitet vor.
+- [ ] **Wunsch Luljeta (15.10.): DATEV anbinden.** Ergebnis Prüfung 15.10.: Echte Schnittstelle (DATEV-API) braucht Partnerprogramm und Wochen; DATEV Belegtransfer (Ordner-Upload) braucht SmartCard/mIDentity, nicht SmartLogin. Passender Weg: **DATEV Upload Mail** (in Unternehmen online unter Belege → Einstellungen → Upload Mail; Absender l.bajraktari@ und rechnung@ registrieren). Dann legt der Mitarbeiter je Beleg einen Entwurf mit PDF an die DATEV-Adresse ab, Luljeta drückt Senden. Zieladresse in die Empfänger-Freigabeliste. Mit Dornbach klären, ob freigeschaltet/kostenpflichtig. Belege und Buchhaltung direkt zu DATEV hochladen (DATEV Unternehmen online / Belegtransfer), Verbindung zur Kanzlei. Abhängig vom geplanten Kanzleiwechsel zu Diana Rohrbach (Agenda), vorher klären, welches System gilt. Hochladen bleibt „ein Klick“: nur nach Luljetas Ja.
+
+- [x] **MUBA-Abo Microsoft 365 Business Basic: Septemberabbuchung gesucht** (15.10.): gefunden auf Arbers Kartenabrechnung unter „Mfst“, alles bezahlt. Abo: 5 Lizenzen, 33,32 €/Monat, monatlich über Arbers private Karte (Entscheidung Arber 15.10.: bleibt so), verlängert sich am 18.01.2027. Admin Center zeigt den Zahlungsstatus nicht („N/V“), Abbuchungen nur auf der Kartenabrechnung sichtbar.
+- [ ] **MUBA-Abo vor dem 18.01.2027 entscheiden:** verlängern oder kündigen (erst nach der Postfach-Sicherung). Bei Gelegenheit mit dem Insolvenzverwalter klären, ob die Kosten der MUBA erstattet werden.
 
 ## 🟠 Wochenende
 
@@ -29,7 +36,7 @@ Stand: 15.10.2026, nachts
 - [ ] **Fernzugang** für Arber (Tailscale, eigenes PrimärBau-Konto, PC teilen) und Edona (Büronetz, feste IP am Router). Plan Teil 4, Skript `module-installs/remote-windows/scripts/weg-n-einrichten.ps1`.
 - [ ] **PC als Haupt-PC:** Dauerbetrieb (ist im Weg-N-Skript), BIOS „Power On after AC loss“.
 - [ ] **Ablage-Modul** (`/install module-installs/ablage`): Ordnersystem für Unterlagen, Scans, Mail-Anhänge; PDF-Volltextsuche.
-- [ ] **Buchhaltung** mit Edona (`module-installs/buchhaltung`), TEAM3-Weg mit dem IT-Dienstleister klären.
+- [ ] **Buchhaltung** mit Edona (`module-installs/buchhaltung`), TEAM3-Weg mit dem IT-Dienstleister klären. Stand 15.10.: Steuerberater für die laufende FiBu ist **Dornbach** (Fabian Schmitz), Belege gehen nach DATEV Unternehmen Online, Bank ist die VR Bank (vb-rb.de). Für den Abgleich fehlt ein Kontoauszug-Export (CSV) je Monat. Fehlende Belege September: `data/buchhaltung/2026-09-fehlende-belege/ARBEITSLISTE.md` (Anhänge per Behelfsskript nur lesend geholt).
 - [ ] **Edonas Kontext** ergänzen (`/install module-installs/kontext`, nur ihr Teil).
 - [ ] **Automatischer Morgen-Lauf** von `/posteingang` (v2): `claude setup-token`, Aufgabenplanung.
 - [ ] Optional: `CLAUDE_CODE_OAUTH_TOKEN` für schönere Texte der nächtlichen Sicherung.
