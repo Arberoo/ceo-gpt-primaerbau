@@ -14,6 +14,7 @@
 2. Alle Dateien in `context/` lesen; `context/import/` falls Dateien darin liegen.
 3. `HISTORY.md` und `docs/_index.md` lesen.
 4. **Briefings:** In `outputs/briefings/` nach einer Datei mit „Status: OFFEN“ suchen. Technik-Punkte darin selbst still erledigen.
+4a. **Briefing gegen die Postfächer prüfen:** Jeden Punkt im Briefing, der „offen, ob gesendet“, „Entwurf liegt bereit“ oder „wartet auf Antwort“ sagt, selbst nachsehen, bevor er Luljeta vorgelegt wird: gesendete Mails **aller** Postfächer (PrimärBau in `data/data.db`, Ordner „Gesendete Elemente“, **ohne Zeitfenster ab Erstellung des Entwurfs**; MUBA über `mail_muba` → `sentitems` für beide Konten) und die Entwürfe-Ordner. Ist etwas schon raus, still im Briefing als erledigt markieren. **Luljeta nie fragen, ob sie etwas abgeschickt hat** – das steht in den Postfächern. Nur fragen, was sich wirklich nicht nachsehen lässt (z. B. ein Telefonat).
 5. **Fristen:** `context/current-data.md` (Tabelle „Dringend“) und, falls vorhanden, `outputs/posteingang/fristen.md`: alle offenen Fristen, deren eigener Termin in den nächsten 14 Tagen liegt oder vorbei ist.
 6. **Privat:** `data/privat/offen.md` (nur lokal) lesen.
 7. **Sicherungs-Check:** letzte Zeilen von `data/auto_commit.log` und `.venv\Scripts\python.exe -X utf8 scripts\intel\idle_imap.py --status`. Merken, ob alles läuft.
