@@ -8,6 +8,8 @@ Stand: 15.10.2026, nachts
 
 ## 🔴 Zuerst
 
+- [ ] **Nacht-Sicherung 15.10. 23:45 ist nicht gelaufen** (kein Eintrag in `data/auto_commit.log`, letzter Lauf 14.10.). Vermutlich PC im Energiesparmodus (Wachhalte-Programm endete 15.10. 8 Uhr). Prüfen: Aufgabe „Reaktivierung zum Ausführen“ / „verpasste Ausführung nachholen“. Mitarbeiter hat am 16.10. morgens von Hand gesichert.
+
 - [ ] **MUBA-Postfächer als PST sichern (Weg A).** Outlook lädt info@ und l.bajraktari@ (MUBA) seit 14.10. komplett nach (Stand 14.10. spät: info@ bis 06/2023, l.bajraktari@ bis 06/2025). Wenn fertig: Export nach `C:\MUBA-Sicherung`, dann eine Kopie auf eine externe Festplatte. Anleitung `docs/muba-postfaecher-sichern.md`. **Vor** dem Bau des Mail-Assistenten.
 - [ ] **Mail an Herrn Festing senden.** Entwurf liegt in info@primaerbau.com unter „Entwürfe“ (Zugangsdaten fesel@, Salzberger, karl@). Für den Fall Kautz wichtig, Frist 23.10. Wenn die Zugangsdaten kommen: verdeckt hinterlegen und anbinden lassen (Akte `data/akten/2026-444-Bayrhof-Kautz/AKTE.md`).
 - [ ] **Mail-Assistent bauen:** `/implement plans/2026-10-15-mail-assistent-posteingang.md` (nach dem PST-Export). Danach Luljeta kurz zeigen, wie sie `/posteingang` nutzt.
