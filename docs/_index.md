@@ -24,4 +24,4 @@
 
 | Bedingung | Doku | Zusammenfassung |
 |---|---|---|
-| _(Dokus erscheinen hier, sobald du externe Dienste anbindest)_ | | |
+| Kontostand, Umsätze, Volksbank, Bank-Abruf, TAN-Erneuerung | `docs/bank-anbindung.md` | FinTS nur lesend, Login/PIN in Windows-Anmeldeinformationen, täglicher Abruf 06:30 in data.db, Übersicht `data/kennzahlen/key-metrics.md` |

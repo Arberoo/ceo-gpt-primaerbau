@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  OPTIONAL. Standard ist Piggyback auf com.ceogpt.daten-collect (der DataOS-Tageslauf
+  nimmt collect_banking.py automatisch mit). Diesen eigenen Job nur nutzen, wenn du den
+  Banking-Abruf zu einem anderen Zeitpunkt willst.
+
+  Vor dem Laden: __WORKSPACE_ROOT__ durch den absoluten Workspace-Pfad ersetzen, z.B.
+  /Users/DEINNAME/Desktop/_CEO-GPT. Dann:
+    launchctl load ~/Library/LaunchAgents/com.ceogpt.bank-collect.plist
+-->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.ceogpt.bank-collect</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>__WORKSPACE_ROOT__/.venv/bin/python</string>
+        <string>__WORKSPACE_ROOT__/scripts/collect.py</string>
+        <string>--sources</string>
+        <string>banking</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>__WORKSPACE_ROOT__</string>
+
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>6</integer>
+        <key>Minute</key>
+        <integer>30</integer>
+    </dict>
+
+    <key>StandardOutPath</key>
+    <string>__WORKSPACE_ROOT__/data/bank-collect.log</string>
+    <key>StandardErrorPath</key>
+    <string>__WORKSPACE_ROOT__/data/bank-collect.log</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+    </dict>
+</dict>
+</plist>

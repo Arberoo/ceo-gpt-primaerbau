@@ -18,6 +18,7 @@
 5. **Fristen:** `context/current-data.md` (Tabelle „Dringend“) und, falls vorhanden, `outputs/posteingang/fristen.md`: alle offenen Fristen, deren eigener Termin in den nächsten 14 Tagen liegt oder vorbei ist.
 6. **Privat:** `data/privat/offen.md` (nur lokal) lesen.
 7. **Sicherungs-Check:** letzte Zeilen von `data/auto_commit.log` und `.venv\Scripts\python.exe -X utf8 scripts\intel\idle_imap.py --status`. Merken, ob alles läuft.
+7a. **Bank:** Gibt es `data/kennzahlen/key-metrics.md`, den Abschnitt „Bank“ lesen (Gesamtsaldo, Stand, Hinweise). Steht dort „Bestätigung nötig“ oder läuft eine Freigabe in ≤ 14 Tagen ab: merken.
 8. **Posteingang:** Gibt es den Befehl `.claude/commands/posteingang.md` und in `outputs/posteingang/` noch keinen Überblick von heute, dann am Ende `/posteingang` anbieten.
 
 ## Begrüßung für Luljeta (Standard)
@@ -27,6 +28,7 @@ Kurz, warm, in einfachem Deutsch, Du-Form. **Keine Technik, keine Bau-Themen, ke
 1. **Guten Morgen** und ein Satz, dass du im Bild bist.
 2. **🔴 Was brennt:** Fristen (nächste 14 Tage) und dringende Fälle, je eine Zeile.
 3. **Briefing:** Gibt es ein offenes Briefing, sag „Ich habe ein paar Dinge für dich vorbereitet“ und geh es Punkt für Punkt mit ihr durch, wie in der Datei beschrieben. Immer eine Sache nach der anderen, auf ihre Antwort warten.
+3a. **💶 Konto:** Gibt es Bankdaten, eine Zeile: Kontostand gesamt mit Datum. Will die Bank eine neue Bestätigung, nur: „Die Bank möchte, dass du den Zugang bald einmal am Handy bestätigst, Arber richtet das mit dir ein.“
 4. **🏠 Privat:** eigener kurzer Abschnitt mit den offenen privaten Punkten, damit sie nicht untergehen.
 5. **Angebot:** „Womit fangen wir an?“, gegebenenfalls „Soll ich deine Mails durchgehen?“ (`/posteingang`).
 
@@ -37,7 +39,7 @@ Bau-Themen (Module, Rechte, Fernzugang, Tailscale, Skripte, `plans/AUFBAU-OFFEN.
 ## Begrüßung für Arber
 
 1. Ein Satz Stand.
-2. **Technik:** Sicherung, Mail-Sofort-Abruf, Mail-Abruf mit Ergebnis (OK oder Problem mit Detail).
+2. **Technik:** Sicherung, Mail-Sofort-Abruf, Mail-Abruf mit Ergebnis (OK oder Problem mit Detail), Bank-Abruf (letzte Zeilen `data/daten_abruf.log`, `needs_tan`/Restlaufzeit).
 3. **Bau-Liste:** `plans/AUFBAU-OFFEN.md` lesen, die offenen Punkte unter „Zuerst“ und „Wochenende“ nennen.
 4. Fristen kurz (damit er weiß, was bei Luljeta brennt), aber **keine privaten Einzelheiten** von Luljeta, außer er fragt.
 5. „Woran bauen wir?“

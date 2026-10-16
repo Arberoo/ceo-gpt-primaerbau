@@ -1,0 +1,58 @@
+{
+  "name": "bank-anbindung",
+  "title": "Bankanbindung (FinTS + PSD2, read-only)",
+  "version": "1.3.1",
+  "updated": "2026-09-09",
+  "summary": "Bindet Bankkonten read-only an, auf zwei Wegen im selben Modul: FinTS/HBCI fuer deutsche Banken (Login und PIN im macOS-Schluesselbund) und PSD2 ueber Enable Banking fuer alles, was FinTS nicht kann -- Neobanken wie Revolut, N26 und Trade Republic, Konten im EU-Ausland, PayPal und deutsche Banken ohne FinTS-Zugang. Beide Wege schreiben in DIESELBEN Tabellen, ein Kunde mit Sparkasse und Revolut sieht eine Summe statt zwei. Ein Assistent fragt beim Einrichten ab, welche Konten es gibt, und waehlt je Konto den Weg. Holt taeglich Salden und Umsaetze in die lokale data.db und macht die Liquiditaet in /prime und im Daily Brief sichtbar. Kann ausschliesslich lesen, keine Ueberweisungen.",
+  "modul_art": "Erweiterungs-Modul fuer ein bestehendes Daten-Setup (DataOS). Kopiert Sammler und banking/-Paket ins Workspace, haengt sich an den vorhandenen Tageslauf. Kein eigener Dienst noetig, keine Oberflaeche.",
+  "self_contained": "Der komplette Code liegt im Modul. Zusatz-Bibliotheken je nach Weg: FinTS braucht fints, mt-940 und keyring; PSD2 braucht cryptography. Beide werden erst bei Bedarf importiert -- wer nur Revolut anbindet, braucht fints nicht.",
+  "requires": "DataOS (scripts/db.py, scripts/collect.py, scripts/generate_metrics.py). Fuer den FinTS-Weg: deutsche Bank mit aktiviertem FinTS/HBCI und macOS fuer den Schluesselbund. Fuer den PSD2-Weg: ein eigener kostenloser Enable-Banking-Zugang (restricted production, nur AIS), Anleitung liegt bei.",
+  "provides": [
+    "scripts/collect_banking.py — headless Tages-Sammler, fuehrt beide Wege zusammen",
+    "scripts/banking/ — FinTS: Registry, Schluesselbund, Session, Client, TAN, Setup",
+    "scripts/banking/psd2.py — PSD2 ueber Enable Banking (Freigaben, Konten, Salden, Umsaetze)",
+    "scripts/banking/psd2_setup.py — PSD2-Verbindung einrichten und erneuern",
+    "scripts/banking/assistent.py — fragt ab, was der Kunde hat, und waehlt je Konto den Weg",
+    "scripts/banking/selbsttest.py — 115 Pruefungen ohne Bank und ohne Netz",
+    "reference/enable-banking.md — was Enable Banking ist und wie der Zugang entsteht",
+    "reference/welche-bank-welcher-weg.md — Nachschlagetabelle Bank -> Weg",
+    "Tabellen banking_accounts, banking_balances, banking_transactions, banking_sync_state"
+  ],
+  "harte_regeln": [
+    "Read-only. Das Modul kann keine Ueberweisung ausloesen. Der PSD2-Zugang wird ausdruecklich nur mit dem Dienst AIS (Kontoinformation) angelegt, nie mit PIS.",
+    "Beide Wege schreiben in DIESELBEN Tabellen. Die Spalte 'weg' sagt, woher eine Zeile kam, damit ein Fehler zuzuordnen bleibt.",
+    "Der Weg wird BEIM EINRICHTEN entschieden, nie zur Laufzeit. Ein automatischer Rueckfall im Tageslauf ist unmoeglich, weil beide Wege einen Menschen brauchen (TAN bzw. Freigabe in der Bank-App).",
+    "FinTS: das TAN-Verfahren wird NICHT gesetzt, es gilt die Vorgabe der Bank. Weder im Dialog (FinTS verbietet das) noch davor (Sparkassen nennen ihre Verfahren erst nach der Anmeldung, davor kommt eine leere Liste und die Bank weist mit 9340 ab). Erzwingen nur ausdruecklich ueber 'setup.py verfahren <BLZ> <ID>'.",
+    "FinTS: die Anmelde-TAN muss als ERSTES im Dialog abgearbeitet werden (client.init_tan_response). Wer nur die Rueckgabe von get_sepa_accounts() prueft, sieht sie nie.",
+    "PSD2: genau EIN Abruf pro Tag. Die Banken drosseln auf ~4 Abrufe, wenn der Nutzer nicht aktiv dabei ist. Kein Polling, auch nicht zum Ausprobieren.",
+    "PSD2: vorgemerkte Buchungen (status='PDNG') werden gespeichert, aber NIE in eine Summe gezaehlt. Sonst stimmt der Saldo nicht mit dem der Bank ueberein.",
+    "Ein gescheiterter Weg kippt den anderen nicht. Fehler landen in banking_sync_state, der Lauf geht weiter.",
+    "Leere Eingaben werden nie gespeichert, und Zugangsdaten bzw. Freigaben wandern erst nach einer erfolgreichen Verbindung in den Bestand.",
+    "Der Tages-Abruf fragt nie nach einer TAN oder Freigabe. Braucht die Bank eine, wird das als needs_tan gemeldet und der Lauf geht weiter."
+  ],
+  "install_flow": [
+    "Schritt 1 — DataOS pruefen, Dateien kopieren, Abhaengigkeiten je gewaehltem Weg installieren (siehe INSTALL.md Phase 1).",
+    "Schritt 2 — Selbsttest laufen lassen: python scripts/banking/selbsttest.py muss gruen sein, BEVOR echte Zugangsdaten ins Spiel kommen.",
+    "Schritt 3 — Assistent starten: python scripts/banking/setup.py assistent. Fragt ab, was der Kunde hat, zeigt je Konto den Weg und den Grund, arbeitet dann ab.",
+    "Schritt 3a — FinTS-Konten: IBAN, Login, PIN, dann die TAN, sobald die Bank fragt.",
+    "Schritt 3b — PSD2-Konten: einmalig den kostenlosen Enable-Banking-Zugang anlegen (reference/enable-banking.md), danach je Bank eine Freigabe in der Bank-App.",
+    "Schritt 4 — Ersten Abruf testen (genau EINEN) und den Zeitplan klaeren (Standard: laeuft im DataOS-Tageslauf mit).",
+    "Schritt 5 — Erneuerung erklaeren: etwa alle 180 Tage verlangt die Bank eine frische Bestaetigung. FinTS: setup.py reauth <BLZ>. PSD2: setup.py psd2-reauth <NAME>."
+  ],
+  "sicherheit": "FinTS: eigene Zugangsdaten, eigenes Konto, alles lokal. Rechtlich Selbstzugriff wie bei StarMoney, MoneyMoney oder Hibiscus, kein lizenzpflichtiger Kontoinformationsdienst. Zugangsdaten im System-Schluesselbund, Session-Datei mit Rechten 0600, Session-Blobs werden nur aus eigenen, lokal geschriebenen Dateien geladen. PSD2: der Kunde legt seinen EIGENEN Zugang bei einem lizenzierten Kontoinformationsdienst an, beschraenkt auf AIS (nur lesen); Schluessel und Freigaben liegen als Dateien in data/banking/psd2/ mit Rechten 0600 im Ordner 0700. Ein Passwort geht nie an einen Dritten, die Freigabe passiert in der Bank-App.",
+  "dauer": "etwa 10 Minuten pro Bank, plus einmalig ~10 Minuten fuer den PSD2-Zugang",
+  "python_min": "3.9",
+  "getestet": "Selbsttest deckt die sieben bekannten FinTS-Fehlerbilder und die fuenf Datenfallen des PSD2-Wegs ohne Bank ab (115 Pruefungen); alle wurden durch kuenstliches Zurueckbauen als 'schlaegt an' belegt. Der PSD2-Weg ist am 31.08.2026 zusaetzlich live gegen einen echten Zugang geprueft (Anmeldung, Bankensuche, Freigaben, Schluesselvergabe, echter Saldo-Abruf). Der Lauf gegen eine echte FinTS-Bank ist damit NICHT ersetzt und muss einmal pro Installation stattfinden.",
+  "paketname": "bank-anbindung-v1.zip (Name bleibt v1, damit der Drive-Link stabil bleibt)",
+  "changelog": "CHANGELOG.md",
+  "content_ingestion": {
+    "standard_version": "1.0.0",
+    "scope": "installation_requirements",
+    "default_mode": "provider_limited",
+    "recommendation": "Bestmögliche Anbieterfrische ohne unnötige Abrufe oder TAN-Abfragen.",
+    "reference": "reference/dateneingang.md",
+    "ai_steps_require_consent": true,
+    "runtime_changed_by_this_release": false,
+    "target_setup_verification": "required"
+  }
+}

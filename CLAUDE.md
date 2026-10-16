@@ -121,6 +121,8 @@ Wir bauen den Mitarbeiter in Teilen auf. Jeder Teil ist für sich nützlich, und
 ├── outputs/                 # Fertige Arbeit, Reports, Analysen
 ├── reference/               # Vorlagen und wiederverwendbare Muster
 ├── scripts/                 # Automatisierungs-Skripte (kommen mit neuen Fähigkeiten)
+│   ├── collect.py           # DataOS: Tages-Abruf aller Datenquellen (derzeit Bank)
+│   └── banking/             # Bankanbindung (FinTS, nur lesen)
 └── shares/                  # Verpackte Systeme zum Weitergeben (aus /share)
 ```
 
@@ -221,6 +223,10 @@ Setzt mittendrin einen Speicherpunkt, prüft die Doku und schreibt das Logbuch f
 - **Alt-Postfächer** fesel@, karl@, salzberger@primaerbau.com (ausgeschiedene Mitarbeiter): nur lesen über `mail_pb_fesel`, `mail_pb_karl`, `mail_pb_salzberger` und in `mail_messages`. Keine Entwürfe. Nur gezielt Geschäftliches suchen. Werden bei HostedOffice am 28.02.2027 gelöscht.
 - **MUBA-Postfächer** (Microsoft 365): live über das MCP-Werkzeug `mail_muba` (Microsoft Graph, eigene Entra-App, angemeldet: l.bajraktari@ und info@muba-service-gmbh.de, im Werkzeug immer `account` angeben). Lesen, Ordner, Anhänge auflisten, **nur Entwürfe**. Senden ist bei Microsoft nicht freigegeben. Doku: `docs/mail-muba-graph.md`. Andere MUBA-Postfächer notfalls über Outlook am PC (`docs/mail-zugriff-outlook.md`).
 - **PrimärBau und MUBA nie vermischen:** Antworten immer aus dem Postfach der Firma, an die die Mail ging.
+
+### Bank (Werkzeug, kein Befehl)
+
+- **PrimärBau-Konto bei der meine Volksbank Raiffeisenbank**, nur lesen über FinTS (`module-installs/bank-anbindung`). Einmal täglich um 06:30 holt die Windows-Aufgabe „CEO-GPT PrimaerBau Daten-Abruf“ Kontostand und Umsätze in `data/data.db` (Tabellen `banking_*`), die Übersicht steht lokal in `data/kennzahlen/key-metrics.md`. Kann **keine Überweisung**. Login und PIN liegen in der Windows-Anmeldeinformationsverwaltung, nie im Chat oder in der `.env`. Etwa alle 180 Tage will die Bank eine Bestätigung in VR SecureGo plus (`setup.py reauth`). Doku: `docs/bank-anbindung.md`.
 
 ### /task-audit
 

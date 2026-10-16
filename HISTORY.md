@@ -8,6 +8,15 @@
 
 ---
 
+## 2026-10-16
+
+### Bankanbindung Volksbank vorbereitet (Arber)
+- Module `bank-anbindung` (v1.3.1) und `daten` aus dem Drive-ZIP nach `module-installs/` entpackt
+- DataOS fehlte: nur der Kern übernommen (`db.py`, `config.py`, `collect.py`, `generate_metrics.py`), Datenbank bleibt im Modus des Mail-Abrufs, Übersicht lokal in `data/kennzahlen/key-metrics.md` (nicht GitHub), eigener Bank-Abschnitt
+- Bankanbindung auf Windows umgestellt: Login/PIN in der Windows-Anmeldeinformationsverwaltung (keyring), echte Windows-Zugriffsrechte statt chmod (`scripts/banking/rechte.py`), Tagesabruf als Windows-Aufgabe (`scripts/setup_daten_abruf_windows.ps1`, noch nicht registriert); Abweichungen in `module-installs/bank-anbindung/ANPASSUNGEN.md`
+- Selbsttest 118/118 grün; Bank erkannt: meine Volksbank Raiffeisenbank (BLZ 71160000, Atruvia-Server)
+- Offen: echtes Einrichten mit Luljeta (VR-NetKey, PIN, Freigabe in VR SecureGo plus), danach erster Abruf und Tagesaufgabe
+
 ## 2026-10-15
 
 ### Buchhaltung vorbereitet, Alt-Postfächer, Selbststart (Arber)

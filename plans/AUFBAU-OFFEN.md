@@ -4,7 +4,7 @@
 > Der Mitarbeiter zeigt diese Liste **nur**, wenn Arber sich meldet („Hier ist Arber“) oder jemand ausdrücklich danach fragt. Luljeta wird damit nicht konfrontiert.
 > Erledigtes abhaken (nicht löschen), mit Datum. Neue Bau-Themen hier eintragen, nicht in Luljetas Briefings.
 
-Stand: 15.10.2026, nachts
+Stand: 16.10.2026
 
 ## 🔴 Zuerst
 
@@ -39,7 +39,7 @@ Stand: 15.10.2026, nachts
 - [ ] **PC als Haupt-PC:** Dauerbetrieb (ist im Weg-N-Skript), BIOS „Power On after AC loss“.
 - [ ] **Ablage-Modul** (`/install module-installs/ablage`): Ordnersystem für Unterlagen, Scans, Mail-Anhänge; PDF-Volltextsuche.
 - [ ] **Buchhaltung** mit Edona (`module-installs/buchhaltung`), TEAM3-Weg mit dem IT-Dienstleister klären. Stand 15.10.: Steuerberater für die laufende FiBu ist **Dornbach** (Fabian Schmitz), Belege gehen nach DATEV Unternehmen Online, Bank ist die VR Bank (vb-rb.de). Für den Abgleich fehlt ein Kontoauszug-Export (CSV) je Monat. Fehlende Belege September: `data/buchhaltung/2026-09-fehlende-belege/ARBEITSLISTE.md` (Anhänge per Behelfsskript nur lesend geholt).
-- [ ] **Bankanbindung VR Bank (vb-rb.de)** (Arber, 16.10.): Lokal gibt es kein Bank-Modul (Buchhaltungs-Modul verweist auf ein eigenes „Bankanbindungs-Modul“, Module liegen im Drive „Fulfillment → Module“). Vorschlag: Stufe 1 sofort Monats-Export CSV/camt aus dem VR-Banking (Buchhaltungs-Modul, Preset ausfüllen); Stufe 2 nur lesend per FinTS (`python-fints`, Atruvia-Server, Freigabe in VR SecureGo plus), dafür kostenlose FinTS-Produktregistrierung bei der DK (ID nach 2–3 Wochen, Freischaltung bei Banken bis ca. 8 Wochen). GoCardless Bank Account Data nimmt seit 07/2025 keine Neukunden. Offen: Bank-Modul im Drive vorhanden? Genaue Bank/BLZ, PIN-Ablage (verdeckt, nur lesend), keine Überweisungen im Code.
+- [ ] **Bankanbindung Volksbank (FinTS, nur lesen)** (Arber, 16.10.): Modul `bank-anbindung` v1.3.1 + DataOS-Kern installiert, auf Windows angepasst (`module-installs/bank-anbindung/ANPASSUNGEN.md`), Selbsttest 118/118 grün. **Offen:** (1) mit Luljeta `setup.py assistent` im Terminal (IBAN, VR-NetKey/Alias, PIN verdeckt, Freigabe in VR SecureGo plus); (2) genau einen Abruf `collect.py --sources banking`, Übersicht prüfen; (3) Tagesaufgabe `scripts/setup_daten_abruf_windows.ps1`; (4) danach Buchhaltungs-Modul auf `SOURCE_MODE=auto` (Bank-CSV entfällt). Lehnt die Bank die Produkt-Kennung ab (9078/3079): eigene DK-Registrierung (fints.org, 2–8 Wochen). Doku `docs/bank-anbindung.md`.
 - [ ] **Edonas Kontext** ergänzen (`/install module-installs/kontext`, nur ihr Teil).
 - [ ] **Automatischer Morgen-Lauf** von `/posteingang` (v2): `claude setup-token`, Aufgabenplanung.
 - [ ] Optional: `CLAUDE_CODE_OAUTH_TOKEN` für schönere Texte der nächtlichen Sicherung.
