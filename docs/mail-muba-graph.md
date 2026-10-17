@@ -38,3 +38,7 @@ Bei mehreren Postfächern im Werkzeug immer `account` angeben (z. B. `"account":
 |---|---|
 | 2026-10-15 | Eingerichtet, l.bajraktari@ angemeldet, Lesen getestet |
 | 2026-10-17 | Entwürfe ändern und löschen freigeschaltet (nur isDraft, Arber). Rechte unverändert (Mail.ReadWrite), kein neuer Login nötig. Test: Ändern einer empfangenen Mail abgelehnt |
+
+## Antwort-Entwurf mit Formatierung und Verlauf (17.10.2026)
+
+`create-reply-draft` mit `Message.body` ersetzt den ganzen Text, der Verlauf geht verloren. Reiner Text in `Comment` verliert alle Zeilenumbrüche. Was funktioniert: **HTML direkt in `Comment`** schreiben (z. B. `<div style="font-family:Calibri,sans-serif;font-size:11pt"><p style="margin:0">…</p>…</div>`). Graph übernimmt das HTML über dem zitierten Verlauf. CC lässt sich im selben Aufruf über `Message.ccRecipients` setzen. Firmenblock MUBA: „Geschäftsführer: Musli Bajraktari“.
