@@ -230,7 +230,7 @@ Setzt mittendrin einen Speicherpunkt, prüft die Doku und schreibt das Logbuch f
 
 ### Buchhaltung (Fähigkeit `buchhaltung`, kein Befehl)
 
-- Monatsabschluss für die Kanzlei Dornbach (Fabian Schmitz, Abgabe über DATEV Unternehmen Online, **Luljeta lädt hoch**). Die Buchungen kommen automatisch aus der Bankanbindung. Je Monat: `bank_export.py JJJJ-MM`, dann `buchungsliste.py` (Playbook `.claude/skills/buchhaltung/SKILL.md`, Einstellungen `buchhaltung.config.json`). Unterlagen und Buchungsliste lokal in `data/buchhaltung/abschluss/`. „Ohne Beleg“ heißt „nicht lokal“. Was schon in DATEV liegt, prüft der **DATEV-Abgleich**: Luljeta meldet sich im Browser in DATEV Unternehmen Online an, der Mitarbeiter liest die Belegliste (nur lesen) und gleicht mit `datev_abgleich.py` ab. Abweichungen vom Modul: `module-installs/buchhaltung/ANPASSUNGEN.md`.
+- Monatsabschluss für die Kanzlei Dornbach (Fabian Schmitz, Abgabe über DATEV Unternehmen Online; hochladen tut der Mitarbeiter über Chrome, **nur mit Luljetas Ja je Vorgang**, sie meldet sich per SmartLogin an). Die Buchungen kommen automatisch aus der Bankanbindung. Je Monat: `bank_export.py JJJJ-MM`, dann `buchungsliste.py` (Playbook `.claude/skills/buchhaltung/SKILL.md`, Einstellungen `buchhaltung.config.json`). Unterlagen und Buchungsliste lokal in `data/buchhaltung/abschluss/`. „Ohne Beleg“ heißt „nicht lokal“. Was schon in DATEV liegt, prüft der **DATEV-Abgleich**: Luljeta meldet sich im Browser in DATEV Unternehmen Online an, der Mitarbeiter liest die Belegliste (nur lesen) und gleicht mit `datev_abgleich.py` ab. Abweichungen vom Modul: `module-installs/buchhaltung/ANPASSUNGEN.md`.
 
 ### /task-audit
 

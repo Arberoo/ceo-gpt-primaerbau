@@ -10,6 +10,11 @@
 
 ## 2026-10-17
 
+### Belege hochgeladen, Scan-Eingang, UTA (Luljeta)
+- 4 fehlende September-Belege (DR 20260753, AR 72-, 73-, 75-09-26) über Chrome in DATEV hochgeladen, mit Luljetas Ja, im Posteingang geprüft
+- Scan-Eingang `C:\PrimaerBau-Belege\Scan-Eingang` mit Desktop-Verknüpfung für Kassenbons, Tankbelege, Verträge
+- Entwurf an UTA (Herr Ebert): Bitte um Rechnung zur Vorauszahlung 2.500 € vom 23.09., als Antwort im Verlauf
+
 ### DATEV-Abgleich September (Arber mit Luljeta)
 - DATEV Unternehmen Online im eingebauten Browser, Luljeta angemeldet, Belegliste (556 Belege Ablage + 11 Posteingang) nur gelesen
 - Neues Skript `.claude/skills/buchhaltung/scripts/datev_abgleich.py`: Bankzeile ↔ DATEV-Beleg über Nummer, Rechnungsnummer, Betrag+Datum, Skonto
