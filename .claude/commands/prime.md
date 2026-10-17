@@ -19,6 +19,7 @@
 6. **Privat:** `data/privat/offen.md` (nur lokal) lesen.
 7. **Sicherungs-Check:** letzte Zeilen von `data/auto_commit.log` und `.venv\Scripts\python.exe -X utf8 scripts\intel\idle_imap.py --status`. Merken, ob alles läuft.
 7a. **Bank:** Gibt es `data/kennzahlen/key-metrics.md`, den Abschnitt „Bank“ lesen (Gesamtsaldo, Stand, Hinweise). Steht dort „Bestätigung nötig“ oder läuft eine Freigabe in ≤ 14 Tagen ab: merken.
+7b. **Scan-Eingang:** Liegen in `C:\PrimaerBau-Belege\Scan-Eingang` (ohne `erledigt`) neue Dateien, merken und in der Begrüßung anbieten: „Es sind N neue Scans da, soll ich sie einsortieren?“ (Ablauf im Playbook Buchhaltung).
 8. **Posteingang:** Gibt es den Befehl `.claude/commands/posteingang.md` und in `outputs/posteingang/` noch keinen Überblick von heute, dann am Ende `/posteingang` anbieten.
 
 ## Begrüßung für Luljeta (Standard)
