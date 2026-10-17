@@ -13,7 +13,7 @@
 ### Belege hochgeladen, Scan-Eingang, UTA (Luljeta)
 - 4 fehlende September-Belege (DR 20260753, AR 72-, 73-, 75-09-26) über Chrome in DATEV hochgeladen, mit Luljetas Ja, im Posteingang geprüft
 - Scan-Eingang `C:\PrimaerBau-Belege\Scan-Eingang` mit Desktop-Verknüpfung für Kassenbons, Tankbelege, Verträge
-- Entwurf an UTA (Herr Ebert): Bitte um Rechnung zur Vorauszahlung 2.500 € vom 23.09., als Antwort im Verlauf
+- UTA (Herr Ebert): Bitte um Rechnung zur Vorauszahlung 2.500 € vom 23.09. von Luljeta gesendet; geplante Aufgaben `uta-vorkasse-rechnung-montag`/`-dienstag` (19./20.10., 9 Uhr) prüfen und legen den Beleg bereit
 
 ### DATEV-Abgleich September (Arber mit Luljeta)
 - DATEV Unternehmen Online im eingebauten Browser, Luljeta angemeldet, Belegliste (556 Belege Ablage + 11 Posteingang) nur gelesen
