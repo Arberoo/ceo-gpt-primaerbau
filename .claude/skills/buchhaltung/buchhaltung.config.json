@@ -167,7 +167,9 @@
       "aok",
       "lohnausgleichskas",
       "gehalt",
-      "vorschuss"
+      "vorschuss",
+      "vorlohn",
+      "lohnabschlag"
     ]
   },
   "private_expenses": {

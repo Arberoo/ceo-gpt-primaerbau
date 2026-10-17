@@ -10,6 +10,11 @@
 
 ## 2026-10-17
 
+### Göttingen-Belege und abgehakter Kontoauszug (Luljeta, abends)
+- Edonas Mail „Rechnungen Göttingen“ (33 MB) kam nie an (Grenze 25 MB); 45 Scans aus „Gesendet“ von info@ geholt, 56 Seiten gelesen
+- 46 von 47 Bons auf die Minute einer Kartenzahlung zugeordnet (`bons_abgleich.py`), 42 Dateien mit sprechenden Namen in DATEV hochgeladen und dort geprüft; 1 Barbon zurückgehalten
+- Abgehakter Kontoauszug Sep/Okt als Excel (`kontoauszug_abhaken.py`): September 73 ✓ in DATEV, 24 belegfrei, 57 fehlen; Engine und DATEV-Abgleich gegen Fehltreffer gehärtet (Mandatsnummern, BIC, Monatsbeträge)
+
 ### Belege hochgeladen, Scan-Eingang, UTA (Luljeta)
 - Arian (Ari GaLaBau): Auftragsbestätigung Angebote 55/56 (BV Theresienstr. 11, 97.900 € netto) als echte Antwort mit Verlauf neu als Entwurf; Rechnung 37 geprüft: am 16.10. schon von ihm durch 39-2026 ersetzt, keine Bitte nötig
 - `entwurf_html.py`: umbrochene Outlook-Kopfzeilen (Message-ID/References) werden geglättet (Antwort auf Arians Mail scheiterte daran)

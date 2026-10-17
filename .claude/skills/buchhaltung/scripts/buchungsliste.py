@@ -34,10 +34,12 @@ AMT = re.compile(r"\d+(?:[.,]\d{3})*[.,]\d{2}")
 # PrimaerBau-Anpassung: Betraege wie "4.000,-" (ohne Cent) gibt es auf Handwerker-Rechnungen
 AMT_GLATT = re.compile(r"(\d{1,3}(?:\.\d{3})*),-")
 IBAN_TOKEN = re.compile(r"^[a-z]{2}\d{2}[a-z0-9]{10,30}$")
+BIC_TOKEN = re.compile(r"^[a-z]{6}[a-z0-9]{2}([a-z0-9]{3})?$")  # Bankleitzahl (BIC) des Lieferanten
 MONAT_JAHR = re.compile(r"^(0[1-9]|1[0-2])20\d\d$")
 # Ausdruecklich genannte Rechnungsnummer im Verwendungszweck ("Rechnungsnr: 1225...",
 # "RG 20260753", "ReNr 31-2026", "Rg-Nr.34-2026")
-RE_NR = re.compile(r"(?:rechnungs?-?nr|rech(?:nung)?|re-?nr|rg-?nr|renr|rg)\b\.?\s*:?\s*([a-z0-9][a-z0-9/_-]{3,})", re.I)
+RE_NR = re.compile(r"(?:rechnungs?-?nr|rech(?:nung)?|re-?nr|rg-?nr|renr|rg|re)\b\.?\s*:?\s*([a-z0-9][a-z0-9/_-]{3,})", re.I)
+OHNE_KD = re.compile(r"(?i)\b(mref|cred|kd\.?-?nr|kdnr|kd|kundennr|kundenkonto|k-nr)\.?\s*:?\s*[a-z0-9/._-]+")
 
 MONTHS = {
     "de": {"01": "01 Januar", "02": "02 Februar", "03": "03 Maerz", "04": "04 April",
@@ -236,11 +238,14 @@ def match(txns, idxs, pool):
     global EIGENE
     for ti in idxs:
         t = txns[ti]
-        toks = [squeeze(x) for x in reftokens(t["ref"])]
+        # Mandats-, Glaeubiger- und Kundennummern stehen auf jeder Rechnung des Lieferanten
+        zweck = OHNE_KD.sub(" ", t["ref"])
+        toks = [squeeze(x) for x in reftokens(zweck)]
         rts = list(dict.fromkeys(r for r in toks if len(r) >= 5 and not IBAN_TOKEN.match(r)
                                  and not MONAT_JAHR.match(r)
+                                 and not BIC_TOKEN.match(r)
                                  and not any(r in eigen for eigen in EIGENE)))
-        genannt = [squeeze(x.split("/")[0]) for x in RE_NR.findall(t["ref"])]
+        genannt = [squeeze(x.split("/")[0]) for x in RE_NR.findall(zweck)]
         genannt = [g for g in genannt if len(g) >= 4 and sum(c.isdigit() for c in g) >= 3]
         ibans = [r for r in toks if IBAN_TOKEN.match(r)]
         camt = {round(abs(t["eur"]), 2)} | ({round(t["org"], 2)} if t["org"] else set())

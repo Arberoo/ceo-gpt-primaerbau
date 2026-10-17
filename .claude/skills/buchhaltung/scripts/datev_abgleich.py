@@ -76,11 +76,16 @@ def name_passt(bank_text, partner):
 
 
 def main():
-    monat, tsv = sys.argv[1], sys.argv[2]
-    jahr, mm = monat.split("-")
-    ordner = os.path.join(CFG["folder_root"], jahr, MONATE[mm])
-    liste = os.path.join(CFG["folder_root"], jahr, f"Buchungsliste_{jahr}.csv")
-    bank = [r for r in csv.DictReader(open(liste, encoding="utf-8")) if r["Datum"].startswith(monat)]
+    # mehrere Monate gemeinsam: jeder DATEV-Beleg zaehlt nur einmal (Monatsrechnungen gleichen Betrags)
+    monate, tsv = sys.argv[1:-1], sys.argv[-1]
+    bank = []
+    for monat in monate:
+        jahr, mm = monat.split("-")
+        liste = os.path.join(CFG["folder_root"], jahr, f"Buchungsliste_{jahr}-{mm}.csv")
+        if not os.path.exists(liste):
+            liste = os.path.join(CFG["folder_root"], jahr, f"Buchungsliste_{jahr}.csv")
+        bank += [r for r in csv.DictReader(open(liste, encoding="utf-8")) if r["Datum"].startswith(monat)]
+    bank.sort(key=lambda x: x["Datum"])
     datev = list(csv.DictReader(open(tsv, encoding="utf-8"), delimiter="\t"))
     for e in datev:
         e["_betrag"], e["_datum"] = betrag(e["Betrag"]), d(e["Belegdatum"])
@@ -94,14 +99,15 @@ def main():
         # Kundennummern stehen auf jeder Rechnung eines Lieferanten: nie als Treffer
         ohne_kd = re.sub(r"(?i)(kd\.?-?nr\.?|k-nr\.?|kundennr\.?|kundenkonto|kd)\s*:?\s*[A-Za-z0-9/-]+", " ", text)
         roh = re.findall(r"[A-Za-z0-9][A-Za-z0-9/_-]{4,}", ohne_kd)
-        nummern = [re.sub(r"[^a-z0-9]", "", n.lower()) for t in roh for n in t.split("/")]
+        teile = [n for t in roh for n in re.split(r"[/-]", t)] + [t.replace("/", "") for t in roh]
+        nummern = [re.sub(r"[^a-z0-9]", "", n.lower()) for n in teile]
         nummern = [n for n in nummern if len(n) >= 5 and sum(c.isdigit() for c in n) >= 5]
         eigen = [re.sub(r"[^a-z0-9]", "", i.lower()) for i in CFG.get("own_ibans", [])]
         nummern = [n for n in nummern if not any(n in e for e in eigen) and n != "71160000"]
         rnr = set(RNR.findall(text))
         return bd, amt, text, nummern, rnr
 
-    def datum_ok(bd, e, tage=60):
+    def datum_ok(bd, e, tage=31):
         # Beleg liegt vor der Buchung (bis 'tage' Tage) oder hoechstens 10 Tage danach
         return e["_datum"] is None or (-10 <= (bd - e["_datum"]).days <= tage)
 
@@ -120,7 +126,8 @@ def main():
                 return i, "sicher (Nummer)"
             if art == 2 and e["_betrag"] and abs(e["_betrag"] - amt) < 0.005 and e["_datum"]                     and datum_ok(bd, e) and (name_passt(text, e["Geschaeftspartner"]) or amt >= 100):
                 return i, "sicher (Betrag+Datum)"
-            if art == 3 and e["_betrag"] and abs(e["_betrag"] - amt) <= 0.035 * amt and datum_ok(bd, e)                     and name_passt(text, e["Geschaeftspartner"]):
+            tank = any(k in (e["Geschaeftspartner"] or "").lower() for k in ("tbg", "tankstelle"))
+            if art == 3 and not tank and e["_betrag"] and abs(e["_betrag"] - amt) <= 0.035 * amt and datum_ok(bd, e)                     and name_passt(text, e["Geschaeftspartner"]):
                 return i, "wahrscheinlich (Skonto/Rundung)"
         return None, ""
 
@@ -137,19 +144,20 @@ def main():
                 e = datev[i]
                 r["DATEV"] = f"{e['Ablage']}: {wie}"
                 r["DATEV_Datei"] = f"{e['Dateiname']} ({e['Eingangsdatum']})"
-    aus = list(bank)
-    aus.sort(key=lambda x: x["Datum"])
-    ziel = os.path.join(ordner, f"DATEV-Abgleich_{monat}.csv")
-    with open(ziel, "w", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=list(aus[0].keys()))
-        w.writeheader()
-        w.writerows(aus)
-    zaehl = {}
-    for r in aus:
-        k = r["DATEV"].split(":")[0] if r["DATEV"] not in ("-", "NICHT IN DATEV") else r["DATEV"]
-        zaehl[k] = zaehl.get(k, 0) + 1
-    print(ziel)
-    print(zaehl)
+    for monat in monate:
+        jahr, mm = monat.split("-")
+        aus = [r for r in bank if r["Datum"].startswith(monat)]
+        ziel = os.path.join(CFG["folder_root"], jahr, MONATE[mm], f"DATEV-Abgleich_{monat}.csv")
+        with open(ziel, "w", newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=list(aus[0].keys()))
+            w.writeheader()
+            w.writerows(aus)
+        zaehl = {}
+        for r in aus:
+            k = r["DATEV"].split(":")[0] if r["DATEV"] not in ("-", "NICHT IN DATEV") else r["DATEV"]
+            zaehl[k] = zaehl.get(k, 0) + 1
+        print(ziel)
+        print(zaehl)
 
 
 if __name__ == "__main__":

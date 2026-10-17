@@ -37,3 +37,9 @@ Ergebnis September: 18 Zuordnungen, alle von Hand geprüft und richtig. Grenze: 
 ## Bei einem Modul-Update
 
 `match()`, `reftokens()`, `AMT`/`AMT_GLATT`, `RE_NR`, `EIGENE` und den Umbuchungs-Zweig in `categorize()` übernehmen (markiert mit „PrimaerBau-Anpassung“), danach September neu laufen lassen und die Treffer gegen `data/buchhaltung/abschluss/2026/09 September/ABGLEICH-SEPTEMBER.md` prüfen.
+
+## Nachtrag 17.10.2026 abends
+
+- Neu: `bons_abgleich.py` (gescannte Bons ↔ Kartenzahlungen, Betrag + Kaufdatum + Uhrzeit), `kontoauszug_abhaken.py` (Excel je Monat mit Haken), `datev_abgleich.py` mehrere Monate gemeinsam (ein DATEV-Beleg zählt nur einmal), Zeitfenster Betrag+Datum 31 Tage, Skonto-Stufe nicht für Tankbelege.
+- Engine: Mandats-/Gläubiger-/Kundennummern (`MREF`, `CRED`, `KdNr` …) und BICs nie als Rechnungsnummer; „RE 12345“ zählt als genannte Rechnungsnummer.
+- Grenze: Die Engine läuft je Monat; lokale Belege können in einem Folgemonat erneut passen (Hilti, Rg. 31). Deshalb im Abhaken von Hand geprüfte Korrekturen (`korrekturen_abhaken.csv`).
