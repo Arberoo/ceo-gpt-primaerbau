@@ -37,4 +37,4 @@ Bei mehreren Postfächern im Werkzeug immer `account` angeben (z. B. `"account":
 | Datum | Änderung |
 |---|---|
 | 2026-10-15 | Eingerichtet, l.bajraktari@ angemeldet, Lesen getestet |
-| 2026-10-17 | Entwürfe ändern und löschen freigeschaltet (nur isDraft, Arber). Rechte unverändert (Mail.ReadWrite), kein neuer Login nötig |
+| 2026-10-17 | Entwürfe ändern und löschen freigeschaltet (nur isDraft, Arber). Rechte unverändert (Mail.ReadWrite), kein neuer Login nötig. Test: Ändern einer empfangenen Mail abgelehnt |
