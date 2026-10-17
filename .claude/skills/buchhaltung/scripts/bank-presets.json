@@ -1,0 +1,65 @@
+{
+  "_info": "Vorgefertigte Spalten-Mappings pro Bank. Beim Setup waehlt der Installer ein Preset oder fuellt 'generic' anhand der Kopfzeile der echten Export-CSV aus. Die Keys links (date, amount, ...) sind fix, die Werte rechts sind die echten Spaltennamen der jeweiligen Bank.",
+  "presets": {
+    "revolut": {
+      "label": "Revolut Business",
+      "csv_column_map": {
+        "date": "Date completed (UTC)",
+        "type": "Type",
+        "description": "Description",
+        "reference": "Reference",
+        "amount": "Amount",
+        "orig_amount": "Orig amount",
+        "orig_currency": "Orig currency",
+        "balance": "Balance"
+      },
+      "fee_type": "FEE",
+      "internal_patterns": [
+        "from euro",
+        "refund of contribution"
+      ]
+    },
+    "generic": {
+      "label": "Generische Bank (beim Setup ausfuellen)",
+      "csv_column_map": {
+        "date": "",
+        "type": "",
+        "description": "",
+        "reference": "",
+        "amount": "",
+        "orig_amount": "",
+        "orig_currency": "",
+        "balance": ""
+      },
+      "fee_type": "",
+      "internal_patterns": []
+    },
+    "volksbank_db": {
+      "label": "Volksbank ueber die Bankanbindung (CSV aus data.db, scripts/bank_export.py)",
+      "csv_column_map": {
+        "date": "Datum",
+        "type": "Typ",
+        "description": "Beschreibung",
+        "reference": "Referenz",
+        "amount": "Betrag",
+        "orig_amount": "",
+        "orig_currency": "",
+        "balance": ""
+      },
+      "fee_type": "ENTGELT",
+      "internal_patterns": [
+        "interne umbuchung"
+      ]
+    }
+  },
+  "_field_help": {
+    "date": "Buchungsdatum (Pflicht). Wird auf YYYY-MM-DD gelesen, Monat = Zeichen 6-7.",
+    "amount": "Betrag mit Vorzeichen (Pflicht): positiv = Eingang, negativ = Ausgang.",
+    "description": "Verwendungszweck / Gegenpartei (Pflicht fuers Matching).",
+    "reference": "Referenz / Rechnungsnummer (optional, staerkstes Match-Kriterium).",
+    "type": "Buchungsart, z.B. FEE fuer Gebuehren (optional).",
+    "orig_amount": "Betrag in Originalwaehrung bei Fremdwaehrung (optional).",
+    "orig_currency": "Originalwaehrung, z.B. USD (optional).",
+    "balance": "Kontostand nach der Buchung (optional, nur zur Kontrolle)."
+  }
+}

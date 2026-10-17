@@ -24,4 +24,5 @@
 
 | Bedingung | Doku | Zusammenfassung |
 |---|---|---|
+| Buchhaltung, Monatsabschluss, Belege zuordnen, Buchungsliste für Dornbach | `.claude/skills/buchhaltung/SKILL.md` | Bankdaten → `bank_export.py` → `buchungsliste.py`, Ordner `data/buchhaltung/abschluss/`, Anpassungen `module-installs/buchhaltung/ANPASSUNGEN.md` |
 | Kontostand, Umsätze, Volksbank, Bank-Abruf, TAN-Erneuerung | `docs/bank-anbindung.md` | FinTS nur lesend, Login/PIN in Windows-Anmeldeinformationen, täglicher Abruf 06:30 in data.db, Übersicht `data/kennzahlen/key-metrics.md` |

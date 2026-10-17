@@ -10,11 +10,15 @@
 
 ## 2026-10-17
 
+### Buchhaltung auf Bankdaten umgestellt, September abgeglichen (Arber)
+- Modul `buchhaltung` als Fähigkeit installiert, Quelle = Bankanbindung (`bank_export.py` legt Monats-CSV ab), Ordner lokal `data/buchhaltung/abschluss/`, Kanzlei Dornbach
+- Zuordnungs-Engine umgebaut: Original ordnete 18 von 20 falsch zu (Jahreszahl, IBAN, Kundennummern als „Rechnungsnummer“); jetzt Punkte mit Bestätigung, alle 18 Treffer im September geprüft
+- 13 September-Rechnungen nur lesend aus den Postfächern geholt; Fund: bezahlt wurde DR-Rechnung 20260753, hochgeladen war 20260806
+- September: 154 Umsätze, 18 mit Beleg, 24 belegfrei, 112 ohne lokalen Beleg (meist Kassen- und Tankbons); Übersicht im Monatsordner
+
 ### Auto-Sicherung 2026-10-17
 - 2 Datei(en) automatisch gesichert und gepusht
 - (aus dem Diff erfasst, keine Gesprächsdetails verfügbar)
-
-## 2026-10-17
 
 ### Bank angebunden (Arber mit Luljeta)
 - Volksbank-Zugang über FinTS eingerichtet, zwei Konten, erster Abruf ohne TAN: Salden und Umsätze ab 20.07.2026 in `data/data.db`

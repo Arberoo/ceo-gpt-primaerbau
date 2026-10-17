@@ -1,0 +1,203 @@
+{
+  "_info": "PrimaerBau GmbH. Quelle der Buchungen ist die Bankanbindung (data.db), bank_export.py legt je Monat die CSV in '4 Kontoauszug' ab. Ordner lokal unter data/ (nie GitHub). Stand 17.10.2026.",
+  "language": "de",
+  "currency": "EUR",
+  "year": 2026,
+  "folder_root": "C:/CEO-GPT-PrimaerBau/data/buchhaltung/abschluss",
+  "owner_name": "",
+  "company_legal_name": "",
+  "source_mode": "auto",
+  "bank_sources": [
+    {
+      "name": "Volksbank",
+      "preset": "volksbank_db",
+      "csv_column_map": null,
+      "internal_patterns": [
+        "interne umbuchung"
+      ],
+      "fee_type": "ENTGELT"
+    }
+  ],
+  "company_keywords": [
+    "globus",
+    "obi",
+    "hornbach",
+    "poco",
+    "aldi",
+    "lidl",
+    "rewe",
+    "kaufland",
+    "aral",
+    "esso",
+    "shell",
+    "jet ",
+    "tankstelle",
+    "union tank",
+    "wuerth",
+    "hilti",
+    "bauwaren mahler",
+    "dempewolf",
+    "dekra",
+    "adac",
+    "vodafone",
+    "telekom",
+    "nfon",
+    "strato",
+    "qualityhosting",
+    "openai",
+    "auto - ben",
+    "dr steuerberatung",
+    "dornbach",
+    "pavel",
+    "strelink",
+    "garten und landschaftsbau",
+    "bajraktari garten",
+    "se huber",
+    "thaler",
+    "alber",
+    "festing",
+    "mercedes-benz leasing",
+    "stadtwerke",
+    "recyclinghof",
+    "booking",
+    "airbnb",
+    "as-hotel"
+  ],
+  "categories": {
+    "income": [
+      {
+        "match_reference": "-26",
+        "label": "Umsatz (Ausgangsrechnung)"
+      },
+      {
+        "match_description": [
+          "hsm-verguetung"
+        ],
+        "label": "Umsatz Hausmeisterservice (Dauerauftrag WEG)"
+      },
+      {
+        "match_description": [
+          "refund"
+        ],
+        "label": "Erstattung / Gutschrift"
+      }
+    ],
+    "expense": [
+      {
+        "match_description": [
+          "globus",
+          "obi",
+          "hornbach",
+          "poco",
+          "bauwaren mahler",
+          "dempewolf",
+          "wuerth",
+          "hilti",
+          "aldi",
+          "lidl",
+          "rewe",
+          "kaufland"
+        ],
+        "label": "Material / Einkauf"
+      },
+      {
+        "match_description": [
+          "aral",
+          "esso",
+          "shell",
+          "jet ",
+          "tankstelle",
+          "union tank",
+          "classic"
+        ],
+        "label": "Kraftstoff"
+      },
+      {
+        "match_description": [
+          "vodafone",
+          "telekom",
+          "nfon",
+          "strato",
+          "qualityhosting",
+          "openai"
+        ],
+        "label": "Telefon, Internet, Software"
+      },
+      {
+        "match_description": [
+          "mercedes-benz leasing"
+        ],
+        "label": "Kfz-Leasing"
+      },
+      {
+        "match_description": [
+          "dr steuerberatung",
+          "dornbach",
+          "pavel"
+        ],
+        "label": "Steuerberatung / Recht"
+      },
+      {
+        "match_description": [
+          "booking",
+          "airbnb",
+          "as-hotel",
+          "db vertrieb"
+        ],
+        "label": "Reisekosten"
+      },
+      {
+        "match_description": [
+          "garten und landschaftsbau",
+          "bajraktari garten",
+          "strelink"
+        ],
+        "label": "Fremdleistung / Subunternehmer"
+      }
+    ]
+  },
+  "no_receipt_rules": {
+    "fees": true,
+    "internal_transfers": true,
+    "authority_keywords": [
+      "finanzamt",
+      "finanzkasse",
+      "hauptzollamt",
+      "bundeskasse",
+      "aok",
+      "lohnausgleichskas",
+      "gehalt",
+      "vorschuss"
+    ]
+  },
+  "private_expenses": {
+    "enabled": true,
+    "folder": "5 Privat & Bar",
+    "list_file": "Auslagen_privat_{year}.csv",
+    "ask_monthly": true
+  },
+  "folders": {
+    "contracts": "00 Vertraege & Unterlagen",
+    "sales": "1 Ausgangsrechnungen",
+    "purchases": "2 Eingangsrechnungen",
+    "expenses": "3 Ausgaben",
+    "bank": "4 Kontoauszug",
+    "private": "5 Privat & Bar"
+  },
+  "accountant": {
+    "name": "Fabian Schmitz, Dornbach GmbH",
+    "email": "Fabian.Schmitz@dornbach-muc.de",
+    "language": "de",
+    "handover": "datev_unternehmen_online",
+    "deadline_day": 10
+  },
+  "reminder": {
+    "channel": "none",
+    "send_days": [
+      1,
+      5,
+      8,
+      10
+    ]
+  }
+}

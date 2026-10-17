@@ -228,6 +228,10 @@ Setzt mittendrin einen Speicherpunkt, prüft die Doku und schreibt das Logbuch f
 
 - **PrimärBau-Konto bei der meine Volksbank Raiffeisenbank**, nur lesen über FinTS (`module-installs/bank-anbindung`). Einmal täglich um 06:30 holt die Windows-Aufgabe „CEO-GPT PrimaerBau Daten-Abruf“ Kontostand und Umsätze in `data/data.db` (Tabellen `banking_*`), die Übersicht steht lokal in `data/kennzahlen/key-metrics.md`. Kann **keine Überweisung**. Login und PIN liegen in der Windows-Anmeldeinformationsverwaltung, nie im Chat oder in der `.env`. Etwa alle 180 Tage will die Bank eine Bestätigung in VR SecureGo plus (`setup.py reauth`). Doku: `docs/bank-anbindung.md`.
 
+### Buchhaltung (Fähigkeit `buchhaltung`, kein Befehl)
+
+- Monatsabschluss für die Kanzlei Dornbach (Fabian Schmitz, Abgabe über DATEV Unternehmen Online, **Luljeta lädt hoch**). Die Buchungen kommen automatisch aus der Bankanbindung. Je Monat: `bank_export.py JJJJ-MM`, dann `buchungsliste.py` (Playbook `.claude/skills/buchhaltung/SKILL.md`, Einstellungen `buchhaltung.config.json`). Unterlagen und Buchungsliste lokal in `data/buchhaltung/abschluss/`. „Ohne Beleg“ heißt „nicht lokal“, was schon in DATEV liegt, sieht der Mitarbeiter nicht. Abweichungen vom Modul: `module-installs/buchhaltung/ANPASSUNGEN.md`.
+
 ### /task-audit
 
 Geführtes Interview, das jede wiederkehrende Aufgabe in deinem Business kartiert. Ergebnis ist eine Übersicht mit Bewertung pro Aufgabe (voll automatisierbar, teilweise, noch nicht, nur Mensch). Das ist die Grundlage für den Hand-Teil.
