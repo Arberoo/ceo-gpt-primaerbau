@@ -66,14 +66,18 @@
   "categories": {
     "income": [
       {
-        "match_reference": "-26",
-        "label": "Umsatz (Ausgangsrechnung)"
+        "match_description": [
+          "hsm-verguetung",
+          "-01-25",
+          "-01-26"
+        ],
+        "label": "WEG-Dauerrechnung (Jahresrechnung, liegt der Kanzlei vor)",
+        "no_receipt": true,
+        "_info": "Luljeta 17.10.2026: WEG-Zahlungen laufen ueber Jahresrechnungen, Dornbach hat sie, kein Einzelbeleg noetig"
       },
       {
-        "match_description": [
-          "hsm-verguetung"
-        ],
-        "label": "Umsatz Hausmeisterservice (Dauerauftrag WEG)"
+        "match_reference": "-26",
+        "label": "Umsatz (Ausgangsrechnung)"
       },
       {
         "match_description": [

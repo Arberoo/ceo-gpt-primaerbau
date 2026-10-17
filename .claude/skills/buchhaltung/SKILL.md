@@ -27,6 +27,7 @@ Ausgangsrechnungen, Eingangsrechnungen, Belege/Ausgaben, Kontoauszug. Dazu, fall
   Ergebnis `DATEV-Abgleich_JJJJ-MM.csv` im Monatsordner. **Nur lesen, nie hochladen oder löschen.** Treffer stichprobenartig prüfen, besonders gleiche Monatsbeträge (WEG-Rechnungen).
 - **Ordnernamen deutsch:** `1 Ausgangsrechnungen`, `2 Eingangsrechnungen`, `3 Ausgaben`, `4 Kontoauszug`, `5 Privat & Bar`. Alles unter `data/` (nie GitHub).
 - **Abgabe:** Die Kanzlei Dornbach bucht in DATEV. Belege lädt **Luljeta** in DATEV Unternehmen Online hoch (CEO-GPT lädt nichts hoch). „FEHLT“ in der Buchungsliste heißt „liegt nicht lokal vor“. Was wirklich der Kanzlei fehlt, zeigt erst der DATEV-Abgleich (unten). Abgleich mit der Arbeitsliste `data/buchhaltung/2026-09-fehlende-belege/ARBEITSLISTE.md` und der Fehlliste der Kanzlei.
+- **WEG-Dauerrechnungen** (Luljeta 17.10.2026, mit Dornbach geklärt): Hausmeister-Daueraufträge („HSM-Vergütung“) und Raten auf Januar-Jahresrechnungen (xx-01-25/26) brauchen keinen Einzelbeleg, die Jahresrechnung hat die Kanzlei. **Ausnahme:** monatliche Rechnungen „Objektbegehung“ der WEG Schäfflerbachstr. (68, 73, 77 …) brauchen den Beleg.
 - **Belegfrei** (Config): Löhne/Gehälter/Vorschüsse (Lohnbuchhaltung), Finanzamt/Finanzkasse/Hauptzollamt/Bundeskasse, AOK, SOKA-BAU (Urlaubs- und Lohnausgleichskasse), Bankentgelte, interne Umbuchungen.
 
 ## Schritt 0: Woher kommen die Buchungen?

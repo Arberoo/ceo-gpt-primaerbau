@@ -11,6 +11,7 @@
 ## 2026-10-17
 
 ### Göttingen-Belege und abgehakter Kontoauszug (Luljeta, abends)
+- WEG-Dauerrechnungen (Jahresrechnungen, Kanzlei hat sie) als belegfrei eingestellt; DATEV-Bereiche „Auslagen Fesel/Zuchowski“ sollen umbenannt werden (Arbeitsliste); OBI-Barbon 44,08 € als Privatauslage erfasst (wer, offen)
 - Edonas Mail „Rechnungen Göttingen“ (33 MB) kam nie an (Grenze 25 MB); 45 Scans aus „Gesendet“ von info@ geholt, 56 Seiten gelesen
 - 46 von 47 Bons auf die Minute einer Kartenzahlung zugeordnet (`bons_abgleich.py`), 42 Dateien mit sprechenden Namen in DATEV hochgeladen und dort geprüft; 1 Barbon zurückgehalten
 - Abgehakter Kontoauszug Sep/Okt als Excel (`kontoauszug_abhaken.py`): September 73 ✓ in DATEV, 24 belegfrei, 57 fehlen; Engine und DATEV-Abgleich gegen Fehltreffer gehärtet (Mandatsnummern, BIC, Monatsbeträge)
