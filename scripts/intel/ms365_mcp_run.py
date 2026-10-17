@@ -10,8 +10,8 @@ Angemeldete Postfaecher:
 
 - Kennungen MS365_MCP_CLIENT_ID / MS365_MCP_TENANT_ID aus der .env (nicht geheim)
 - Anmeldung liegt in der Windows-Anmeldeinformationsverwaltung (keytar), nicht im Repo
-- Nur Lese- und Entwurfs-Werkzeuge (ERLAUBT). Senden ist zusaetzlich in der Entra-App
-  nicht freigegeben (kein Mail.Send).
+- Nur Lese- und Entwurfs-Werkzeuge (ERLAUBT), dazu Entwuerfe aendern/loeschen (nur isDraft).
+  Senden ist zusaetzlich in der Entra-App nicht freigegeben (kein Mail.Send).
 - Login und Betrieb MUESSEN dieselben Werkzeuge nutzen, sonst passen die Berechtigungen
   des gespeicherten Tokens nicht (Softeria baut die Scopes aus den Werkzeugen).
 """
@@ -29,6 +29,9 @@ ERLAUBT = [
     "list-mail-messages", "list-mail-folders", "list-mail-child-folders",
     "list-mail-folder-messages", "get-mail-message", "list-mail-attachments",
     "create-draft-email", "create-reply-draft", "create-reply-all-draft",
+    # Nur fuer Entwuerfe (Pruefung im gepatchten Server, src/graph-tools.ts), Arber 17.10.2026.
+    # Loeschen = in "Geloeschte Elemente" verschieben, zurueckholbar.
+    "update-mail-message", "delete-mail-message",
 ]
 
 

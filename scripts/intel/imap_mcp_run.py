@@ -7,7 +7,8 @@ Ersetzt imap-mcp-run.sh aus dem Modul intelligenz-imap (Mac). Aufruf aus .mcp.js
   (Schluessel aus "password_env"), zeigt nichts davon an
 - erlaubt nur Entwuerfe (ACCOUNT_ALLOWED_MUTATIONS=draft): kein Senden, kein Loeschen,
   kein Verschieben. Ohne SMTP-Daten gibt es ausserdem keinen Sendeweg.
-- eigene, leere Config-Datei je Postfach unter %USERPROFILE%\\.ceo-gpt-primaerbau\\mcp-email,
+- Empfaenger/CC/BCC in Entwuerfen frei (ALLOWED_RECIPIENTS=*), ausser bei Alt-Postfaechern.
+  Eigene Entwuerfe wegraeumen: scripts/intel/entwurf_loeschen.py- eigene, leere Config-Datei je Postfach unter %USERPROFILE%\\.ceo-gpt-primaerbau\\mcp-email,
   damit nichts geteilt oder dauerhaft gespeichert wird
 """
 
@@ -67,6 +68,11 @@ def main() -> int:
         "MCP_EMAIL_SERVER_ALLOWED_MUTATIONS": "draft",
         "PYTHONUTF8": "1",
     })
+    # Empfaenger und CC in Entwuerfen frei waehlbar (Arber, 17.10.2026). Die Liste gilt im Server
+    # auch fuer send/forward, die bleiben aber gesperrt: Mutationen nur "draft", kein SMTP.
+    # Alt-Postfaecher (nur_archiv) bekommen keine Empfaenger.
+    if not konto.get("nur_archiv"):
+        env["MCP_EMAIL_SERVER_ALLOWED_RECIPIENTS"] = "*"
     uvx = str(UVX) if UVX.exists() else "uvx"
     return subprocess.call([uvx, "--quiet", "--from", SERVER, "mcp-email-server", "stdio"], env=env)
 
