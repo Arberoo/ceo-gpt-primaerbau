@@ -7,7 +7,7 @@
 - **Entra-App** im MUBA-Mandanten: „CEO-GPT PrimaerBau Mail“, nur dieser Mandant, Anwendungs-ID `fd0a6d4e-5c52-413e-a839-2e1b5e4e7965`, Mandant `db85f637-1f68-4796-aaae-199db56428d4`. Angelegt von Luljetas Konto (Globaler Administrator).
 - **Rechte (delegiert, Admin-Zustimmung erteilt):** `User.Read`, `offline_access`, `Mail.ReadWrite`. **Kein `Mail.Send`**: Senden ist bei Microsoft gar nicht erlaubt.
 - **Baustein:** Softeria `ms-365-mcp-server` v0.113.0, lokal gebaut und gepatcht in `tools/ms-365-mcp/` (geht nicht zu GitHub). Gestartet über `scripts/intel/ms365_mcp_run.py` (MCP-Server `mail_muba` in `.mcp.json`).
-- **Werkzeuge für den Mitarbeiter:** Mails, Ordner und Unterordner auflisten, Mail lesen, Anhänge auflisten, Entwurf / Antwort-Entwurf / Antwort-an-alle-Entwurf anlegen. Abmelden und Konto-Entfernen sind verboten.
+- **Werkzeuge für den Mitarbeiter:** Mails, Ordner und Unterordner auflisten, Mail lesen, Anhänge auflisten, Entwurf / Antwort-Entwurf / Antwort-an-alle-Entwurf anlegen, **Entwürfe ändern** (`update-mail-message`, z. B. Empfänger, CC, Text) und **Entwürfe löschen** (`delete-mail-message`, verschiebt nach „Gelöschte Elemente“). Ändern und Löschen gehen **nur bei Entwürfen**: Der gepatchte Server holt vorher `isDraft` und lehnt alles andere ab (Patch in `tools/ms-365-mcp/src/graph-tools.ts`, Kommentar „CEO-GPT PrimaerBau“; nach einem Update von Softeria neu einbauen). Abmelden und Konto-Entfernen sind verboten.
 - **Anmeldung** liegt in der Windows-Anmeldeinformationsverwaltung.
 
 ## Angemeldete Postfächer
@@ -37,3 +37,4 @@ Bei mehreren Postfächern im Werkzeug immer `account` angeben (z. B. `"account":
 | Datum | Änderung |
 |---|---|
 | 2026-10-15 | Eingerichtet, l.bajraktari@ angemeldet, Lesen getestet |
+| 2026-10-17 | Entwürfe ändern und löschen freigeschaltet (nur isDraft, Arber). Rechte unverändert (Mail.ReadWrite), kein neuer Login nötig |

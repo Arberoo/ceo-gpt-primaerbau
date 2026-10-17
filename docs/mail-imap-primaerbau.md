@@ -67,9 +67,14 @@ Server: `mail.de2.hostedoffice.ag`, Port 993 (SSL), Anmeldung mit Mailadresse + 
 - Die Datenbank speichert nur Kopf und Textanfang (v1). Volltext und Anhänge kommen live über MCP.
 - MUBA-Postfächer (Microsoft 365) folgen über `intelligenz-outlook` (Plan `plans/2026-10-14-fernzugang-und-mailzugriff.md`, Teil 3).
 
+## Empfänger in Entwürfen
+
+Seit 17.10.2026 (Arber) darf der Mitarbeiter in Entwürfen Empfänger, CC und BCC frei setzen: `imap_mcp_run.py` setzt `MCP_EMAIL_SERVER_ALLOWED_RECIPIENTS=*` (nicht bei Alt-Postfächern). Senden bleibt unmöglich: Mutationen nur `draft`, kein SMTP. Entwürfe mit Signatur gehen weiter über `entwurf_html.py --an/--cc`, alte Fassungen weg mit `entwurf_loeschen.py`.
+
 ## History
 
 | Datum | Änderung |
 |---|---|
+| 2026-10-17 | Empfänger/CC in Entwürfen frei (Allowlist `*`), Senden weiter gesperrt |
 | 2026-10-14 | Eingerichtet, Live-Lesen und Löschsperre getestet, Backfill gestartet |
 | 2026-10-14 | Sofort-Abruf per IMAP IDLE (`idle_imap.py`, Aufgabe „Mail-Sofort“ bei Anmeldung), 15-Min.-Abruf wird stündlicher Sicherheitsabgleich mit Wächter |
