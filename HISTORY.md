@@ -11,6 +11,8 @@
 ## 2026-10-17
 
 ### Belege hochgeladen, Scan-Eingang, UTA (Luljeta)
+- Arian (Ari GaLaBau): Auftragsbestätigung Angebote 55/56 (BV Theresienstr. 11, 97.900 € netto) als echte Antwort mit Verlauf neu als Entwurf; Rechnung 37 geprüft: am 16.10. schon von ihm durch 39-2026 ersetzt, keine Bitte nötig
+- `entwurf_html.py`: umbrochene Outlook-Kopfzeilen (Message-ID/References) werden geglättet (Antwort auf Arians Mail scheiterte daran)
 - 4 fehlende September-Belege (DR 20260753, AR 72-, 73-, 75-09-26) über Chrome in DATEV hochgeladen, mit Luljetas Ja, im Posteingang geprüft
 - Scan-Eingang `C:\PrimaerBau-Belege\Scan-Eingang` mit Desktop-Verknüpfung für Kassenbons, Tankbelege, Verträge
 - UTA (Herr Ebert): Bitte um Rechnung zur Vorauszahlung 2.500 € vom 23.09. von Luljeta gesendet; geplante Aufgaben `uta-vorkasse-rechnung-montag`/`-dienstag` (19./20.10., 9 Uhr) prüfen und legen den Beleg bereit

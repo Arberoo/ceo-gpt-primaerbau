@@ -125,8 +125,9 @@ def main() -> int:
     msg["Date"] = formatdate(localtime=True)
     msg["Message-ID"] = make_msgid(domain=domain)
     if orig is not None:
-        mid = (orig.headers.get("message-id") or ("",))[0].strip()
-        refs = (orig.headers.get("references") or ("",))[0].strip()
+        # Umbrochene Kopfzeilen (Outlook) glaetten, sonst lehnt email.policy den Header ab
+        mid = " ".join((orig.headers.get("message-id") or ("",))[0].split())
+        refs = " ".join((orig.headers.get("references") or ("",))[0].split())
         if mid:
             msg["In-Reply-To"] = mid
             msg["References"] = f"{refs} {mid}".strip()
