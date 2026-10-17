@@ -131,7 +131,8 @@ def section_banking(conn):
         lines += ["| Konto | Saldo | Stand |", "|---|---|---|"]
         for r in salden:
             name = " ".join(x for x in (r["bank_label"], r["konto"]) if x)
-            lines.append(f"| {name} …{r['iban'][-4:]} | {eur(r['balance'])} | {r['date']} |")
+            kurz = r["iban"].replace(" ", "")[-10:]
+            lines.append(f"| {name} …{kurz[:4]} {kurz[4:8]} {kurz[8:]} | {eur(r['balance'])} | {r['date']} |")
         summe = sum(r["balance"] or 0 for r in salden if (r["currency"] or "EUR") == "EUR")
         lines += [f"| **Gesamt** | **{eur(summe)}** | |", ""]
 
@@ -139,7 +140,9 @@ def section_banking(conn):
         SELECT SUM(CASE WHEN amount > 0 THEN amount ELSE 0 END) AS ein,
                SUM(CASE WHEN amount < 0 THEN amount ELSE 0 END) AS aus
         FROM banking_transactions
-        WHERE status = 'BOOK' AND booking_date >= date('now', '-30 days')
+        WHERE status = 'BOOK' AND booking_date >= date('now', '-30 days')  -- ohne Umbuchungen zwischen eigenen Konten
+        AND COALESCE(REPLACE(counterparty_iban, ' ', ''), '') NOT IN
+            (SELECT REPLACE(COALESCE(iban_klar, iban), ' ', '') FROM banking_accounts)
     """)
     if fluss and (fluss["ein"] or fluss["aus"]):
         lines += ["**Letzte 30 Tage (gebucht):**",
@@ -150,7 +153,9 @@ def section_banking(conn):
         SELECT COALESCE(NULLIF(counterparty_name, ''), '(ohne Namen)') AS name,
                SUM(amount) AS summe, COUNT(*) AS anzahl
         FROM banking_transactions
-        WHERE status = 'BOOK' AND amount < 0 AND booking_date >= date('now', '-30 days')
+        WHERE status = 'BOOK' AND amount < 0 AND booking_date >= date('now', '-30 days')  -- ohne Umbuchungen zwischen eigenen Konten
+        AND COALESCE(REPLACE(counterparty_iban, ' ', ''), '') NOT IN
+            (SELECT REPLACE(COALESCE(iban_klar, iban), ' ', '') FROM banking_accounts)
         GROUP BY name ORDER BY summe ASC LIMIT 5
     """)
     if top:

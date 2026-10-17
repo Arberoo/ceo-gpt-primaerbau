@@ -29,6 +29,10 @@ powershell -ExecutionPolicy Bypass -File scripts\setup_daten_abruf_windows.ps1  
 
 Einrichten und Erneuern brauchen **Luljeta am Handy** (Freigabe in VR SecureGo plus) und laufen in einem echten Terminal, weil die PIN verdeckt abgefragt wird. Der Mitarbeiter fragt nie im Chat nach PIN oder TAN.
 
+## Stand
+
+Eingerichtet 17.10.2026 mit Luljeta: ein Zugang (VR-NetKey, BLZ 71160000) mit **zwei Konten**, Geschäftskonto …0000 6970 79 und …0100 6970 79. Erster Abruf ohne TAN möglich (Bank meldet 3076 „SCA nicht notwendig“), Umsätze ab 20.07.2026 (ohne TAN gibt die Bank etwa 90 Tage heraus). Die Übersicht rechnet Umbuchungen zwischen den eigenen Konten aus Ein-/Ausgang und Empfängern heraus.
+
 ## Tageslauf
 
 Windows-Aufgabe „CEO-GPT PrimaerBau Daten-Abruf“, 06:30, holt nach, wenn der PC aus war. Fragt nie nach einer TAN. Verlangt die Bank eine neue Bestätigung, steht `needs_tan` in `banking_sync_state` und ein Hinweis in der Übersicht → `setup.py reauth <BLZ>` mit Luljeta.

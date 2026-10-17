@@ -11,7 +11,7 @@ DataOS war **nicht** installiert (kein `scripts/db.py`, `collect.py`, `generate_
 | `scripts/db.py` | daten | **Kein `journal_mode=WAL`**, dafür `timeout=30`. `data/data.db` gehört auch dem Mail-Abruf (IDLE-Dauerläufer, Modus `delete`); ein Umschalten hätte dessen Betrieb verändert. |
 | `scripts/config.py` | daten | unverändert |
 | `scripts/collect.py` | daten | unverändert |
-| `scripts/generate_metrics.py` | daten | Ausgabe nach **`data/kennzahlen/key-metrics.md`** statt `context/group/` (Kontostände sind vertraulich, `context/` geht nachts zu GitHub, `data/` nicht). `section_banking` neu geschrieben (die im Modul erwähnte Vorlage lag nicht bei), Beträge im deutschen Format, nur `status='BOOK'`. Datenfrische ohne `mail_*`-Tabellen, Banking-Tabellen mit ihrer echten Datumsspalte. Schreiben mit `encoding="utf-8"`. |
+| `scripts/generate_metrics.py` | daten | Ausgabe nach **`data/kennzahlen/key-metrics.md`** statt `context/group/` (Kontostände sind vertraulich, `context/` geht nachts zu GitHub, `data/` nicht). `section_banking` neu geschrieben (die im Modul erwähnte Vorlage lag nicht bei), Beträge im deutschen Format, nur `status='BOOK'`. Datenfrische ohne `mail_*`-Tabellen, Banking-Tabellen mit ihrer echten Datumsspalte. Schreiben mit `encoding="utf-8"`. Umbuchungen zwischen eigenen Konten zählen nicht in Ein-/Ausgang und Empfänger; Konten in der Übersicht mit den letzten 10 IBAN-Stellen (beide PrimärBau-Konten enden auf 7079). |
 | `scripts/requirements.txt` | neu | dotenv, requests, fints 5.0.0, mt-940, keyring |
 | `scripts/set_secret.py` | – | **nicht** überschrieben, die vorhandene Fassung bleibt |
 

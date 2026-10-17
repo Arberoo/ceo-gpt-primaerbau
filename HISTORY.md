@@ -14,6 +14,13 @@
 - 2 Datei(en) automatisch gesichert und gepusht
 - (aus dem Diff erfasst, keine Gesprächsdetails verfügbar)
 
+## 2026-10-17
+
+### Bank angebunden (Arber mit Luljeta)
+- Volksbank-Zugang über FinTS eingerichtet, zwei Konten, erster Abruf ohne TAN: Salden und Umsätze ab 20.07.2026 in `data/data.db`
+- Übersicht `data/kennzahlen/key-metrics.md`: Konten unterscheidbar, Umbuchungen zwischen eigenen Konten herausgerechnet
+- Täglicher Abruf als Windows-Aufgabe „CEO-GPT PrimaerBau Daten-Abruf“ (06:30) registriert
+
 ## 2026-10-16
 
 ### Bankanbindung Volksbank vorbereitet (Arber)
