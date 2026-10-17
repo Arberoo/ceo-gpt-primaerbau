@@ -10,6 +10,11 @@
 
 ## 2026-10-17
 
+### DATEV-Abgleich September (Arber mit Luljeta)
+- DATEV Unternehmen Online im eingebauten Browser, Luljeta angemeldet, Belegliste (556 Belege Ablage + 11 Posteingang) nur gelesen
+- Neues Skript `.claude/skills/buchhaltung/scripts/datev_abgleich.py`: Bankzeile ↔ DATEV-Beleg über Nummer, Rechnungsnummer, Betrag+Datum, Skonto
+- September: 40 Buchungen schon in DATEV, 4 liegen bereit und fehlen in DATEV (DR 20260753, Ausgangsrechnungen 72, 73, 75), 86 fehlen ganz (meist Bons ab 17.09.)
+
 ### Buchhaltung auf Bankdaten umgestellt, September abgeglichen (Arber)
 - Modul `buchhaltung` als Fähigkeit installiert, Quelle = Bankanbindung (`bank_export.py` legt Monats-CSV ab), Ordner lokal `data/buchhaltung/abschluss/`, Kanzlei Dornbach
 - Zuordnungs-Engine umgebaut: Original ordnete 18 von 20 falsch zu (Jahreszahl, IBAN, Kundennummern als „Rechnungsnummer“); jetzt Punkte mit Bestätigung, alle 18 Treffer im September geprüft
